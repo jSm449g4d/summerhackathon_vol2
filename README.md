@@ -7,23 +7,23 @@ https://sh2-tlnesjcoqq-an.a.run.app
 
 ## ディレクトリ構成
 
-summerhackathon_vol2/
-┣www/ (アプリ本体)
-┃┣html/ (公開ファイル置き場)
-┃┃┣static/(静的ファイル置き場)
-┃┃┃┗img/(アプリで使う画像置き場)
-┃┃┣favicon.ico (ファビコン)
-┃┃┗robots.txt (googleクローラー等への指示)
-┃┣templates/ (Flaskアプリで使うHTMLテンプレート置き場)
-┃┣Dockerfile (環境構築方法の記述,CaaSへのデプロイ用)
-┃┣wsgi.py (Flask鯖本体/ルーティング等の処理実装箇所)
-┃┣main.py (アプリの機能実装箇所)
-┃┗requirements.txt (必要なライブラリ一覧)
-┣assets (README.mdで使う画像置き場)
-┣.gitignore (git pushでpushしたくないファイル一覧)
-┣cloudbuild.yaml (CaaSへのデプロイ指示書)
-┣LICENSE (MIT: ご自由にお使いください)
-┗README.md この文書
+summerhackathon_vol2/  
+┣www/ (アプリ本体)  
+┃┣html/ (公開ファイル置き場)  
+┃┃┣static/(静的ファイル置き場)  
+┃┃┃┗img/(アプリで使う画像置き場)  
+┃┃┣favicon.ico (ファビコン)  
+┃┃┗robots.txt (googleクローラー等への指示)  
+┃┣templates/ (Flaskアプリで使うHTMLテンプレート置き場)  
+┃┣Dockerfile (環境構築方法の記述,CaaSへのデプロイ用)  
+┃┣wsgi.py (Flask鯖本体/ルーティング等の処理実装箇所)  
+┃┣main.py (アプリの機能実装箇所)  
+┃┗requirements.txt (必要なライブラリ一覧)  
+┣assets (README.mdで使う画像置き場)  
+┣.gitignore (git pushでpushしたくないファイル一覧)  
+┣cloudbuild.yaml (CaaSへのデプロイ指示書)  
+┣LICENSE (MIT: ご自由にお使いください)  
+┗README.md この文書  
 
 
 ## ローカルでの使い方
