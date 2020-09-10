@@ -34,7 +34,7 @@ summerhackathon_vol2/
 詳しくは全部**Dockerfile**に書いてある(笑)
 
 ## 開発の進め方
-1. なんか思いついたことや**雑談**とかあったらissueを立てる(上のCode,Issues,Pull requests Actionsの所)  
+1. なんか思いついたことや**雑談**とかあったらissueを立てる(上のCode,Issues,...,の所)  
 2. 暇なときにissue見て議論する  
 3. 解決できそうならプルリク送ったりマージしたりします  
 
