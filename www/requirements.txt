@@ -6,6 +6,7 @@ setuptools
 flask
 psutil
 waitress
+werkzeug
 
 # application
 newsapi-python

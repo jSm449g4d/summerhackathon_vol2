@@ -16,21 +16,39 @@
 
 <body>
     <div class="bg-light p-1">
-        <div style=" border-bottom: 3px double gray;">
-            <div>
-                <div classe="d-flex  justify-content-between">
-                    <div>
+        <div style="border-bottom: 3px double gray;">
+            <div class="row p-1 px-3">
+                <div class="col-sm-12 col-lg-8 p-1">
+                    <div class="d-flex justify-content-center justify-content-lg-start">
                         <h2 style="font-family:Impact;color:indigo;">
                             <i class="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2 Team3の成果物へようこそ!
                         </h2>
                     </div>
-                    <div>
+                </div>
+                <div class="col-sm-12 col-lg-4 p-1">
+                    <div class="d-flex justify-content-center justify-content-lg-end">
                         <h4 style="font-family:Courier;color:darkgreen;">
                             <i class="fas fa-flask fa-lg faa-wrench animated mr-1"></i>Flask
                         </h4>
                     </div>
                 </div>
             </div>
+        </div>
+        <form method="post" enctype="multipart/form-data" style="display:inline;">
+            <div class="form-inlie">
+                <div class="form-group m-1">
+                    <label for="text1">入力フォーム1:</label>
+                    <input class="form-control form-control-lg" type="text" name="val1" value="{{val1}}" placeholder="" />
+                </div>
+                <div class="d-flex flex-column text-center m-2">
+                    <button class="btn btn-outline-primary btn-lg" name="submit" value="True">
+                        <i class="far fa-arrow-alt-circle-right mr-1"></i>提出
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex flex-column text-center m-1" style="border-bottom: 3px double gray;">
+            {{val1}}
         </div>
     </div>
 
