@@ -2,7 +2,7 @@
 2020/09/09から2020/09/16に行われたハッカソンの成果物です
 
 ## URL
-### 管理者: 石原 (CloudRun)
+#### 管理者: 石原 (CloudRun)
 https://sh2-tlnesjcoqq-an.a.run.app
 
 ## ディレクトリ構成
@@ -31,7 +31,7 @@ summerhackathon_vol2/
 `cd summerhackathon_vol2/www`  
 `pip install -r requirements.txt`  
 `python wsgi.py`  
-詳しくは全部**Dockerfile**に書いてある(笑)
+詳細は**Dockerfile**にて
 
 ## 開発の進め方
 1. なんか思いついたことや**雑談**とかあったらissueを立てる(上のCode,Issues,...,の所)  
