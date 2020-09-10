@@ -1,0 +1,15 @@
+# pip3_package
+wheel
+setuptools
+
+# server
+flask
+psutil
+waitress
+
+# application
+newsapi-python
+BeautifulSoup4
+urllib3
+certifi
+PyJWT
