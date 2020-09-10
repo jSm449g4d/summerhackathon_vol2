@@ -11,11 +11,11 @@ RUN apt update -q;apt upgrade -yq
 WORKDIR $APP/html/static
 RUN apt install npm -yq
 RUN npm install -g npm
-RUN npm install --save jquery@3.5.1 popper.js@1.16.1 bootstrap react react-dom react-bootstrap js-cookie && \
+RUN npm install --save jquery@3.5.1 popper.js@1.16.1 bootstrap && \
     npm install @fortawesome/fontawesome-free lazysizes
 
 # Python3
-WORKDIR $APP/Flask
+WORKDIR $APP
 RUN apt install gcc python3-pip -yq
 RUN pip3 install -U pip
 RUN pip3 install -U -r requirements.txt
