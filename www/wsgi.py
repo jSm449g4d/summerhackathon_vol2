@@ -30,7 +30,6 @@ def indexpage_show():
 # html: domain/* → www/html/*
 @app.route('/<path:name>', methods=["GET", "POST"])
 def html_show(name):
-    wsgi_h.access_counter += 1
     try:
         return flask.send_file(os.path.join("html", name).replace("\\", "/").replace("..", "_"))
     except:
