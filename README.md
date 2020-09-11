@@ -38,7 +38,7 @@ summerhackathon_vol2/
 `cd summerhackathon_vol2/www`  
 `pip install -r requirements.txt`  
 `python wsgi.py`  
-詳細は**Dockerfile**にて
+詳細は**Dockerfile**にて  
 
 ## 開発の進め方
 1. なんか思いついたことや雑談や質問があったら、issueを立てる  
