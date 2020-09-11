@@ -5,6 +5,9 @@ import './stylecheets/style.sass';
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
+    const submit=()=>{
+
+    }
 
     return (
         <div className="p-2 bg-light">
@@ -22,7 +25,7 @@ const AppMain = () => {
                             <h4 style={{ fontFamily: "Courier", color: "darkgreen" }}>
                                 <i className="fas fa-flask fa-lg faa-wrench animated mr-1"></i>Flask
                         </h4>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
