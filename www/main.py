@@ -1,9 +1,6 @@
 import flask
 from werkzeug.utils import secure_filename
 
-# global variable
-restartflag: bool = False
-
 
 def show(request):
     _val1="試しに入力してください";
