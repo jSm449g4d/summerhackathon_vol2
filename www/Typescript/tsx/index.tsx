@@ -94,8 +94,8 @@ const AppMain = () => {
                 総ヒット数:{String(total)}[件]
             </h3>
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart className="btn-push" width={400} height={400} data={data} style={{ cursor: "pointer" }}
-                    onClick={(evt) => { alert(evt.num) }}>
+                <BarChart width={400} height={400} data={data}
+                >
                     <XAxis dataKey="date" />
                     <YAxis dataKey="num" />
                     <CartesianGrid
@@ -103,7 +103,8 @@ const AppMain = () => {
                         strokeDasharray="3 3"
                     />
                     <Tooltip />
-                    <Bar dataKey="num" fill="#8884d8" />
+                    <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
+                        onClick={(evt) => { alert(evt.num) }} />
                 </BarChart>
             </ResponsiveContainer>
         </div>
