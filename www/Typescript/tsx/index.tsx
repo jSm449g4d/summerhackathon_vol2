@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 var moment = require('moment');
 
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
     const [kekka, setKekka] = useState("")
+    const [total, setTotal] = useState(0)
     const kensakusuruyo = () => {
         // access to backend
         const xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -21,7 +22,7 @@ const AppMain = () => {
         xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
     const data = [
-        { date: '2018-12-01', num: 10 },
+        { date: '2018-12-01', num: 10, art: ["gra", "fas"] },
         { date: '2018-12-02', num: 12, },
         { date: '2018-12-03', num: 18, },
         { date: '2018-12-04', num: 10, },
@@ -75,29 +76,34 @@ const AppMain = () => {
             </div>
             <div className="form-inlie">
                 <div className="form-group m-1">
-                    <label htmlFor="text1">検索キーワード:</label>
+                    <h5>検索キーワード:</h5>
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku} placeholder="検索する文字を入力してください"
                         onChange={(evt) => { setKensaku(evt.target.value) }} />
                 </div>
                 <div className="d-flex flex-column text-center m-2">
                     <button className="btn btn-outline-primary btn-lg btn-push"
                         onClick={() => { kensakusuruyo() }}>
-                        <i className="far fa-arrow-alt-circle-right mr-1"></i>提出
+                        <i className="fas fa-search mr-1"></i>検索
                     </button>
                 </div>
             </div>
             <div className="d-flex flex-column text-center m-1" style={{ borderBottom: "3px double gray;" }}>
                 {kekka}
             </div>
+            <h3 className="text-center m-1">
+                総ヒット数:{String(total)}[件]
+            </h3>
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={data}>
-                    <Bar dataKey="num" fill="#8884d8" />
+                <BarChart className="btn-push" width={400} height={400} data={data} style={{ cursor: "pointer" }}
+                    onClick={(evt) => { alert(evt.num) }}>
                     <XAxis dataKey="date" />
+                    <YAxis dataKey="num" />
                     <CartesianGrid
                         stroke="#ccc"
                         strokeDasharray="3 3"
                     />
                     <Tooltip />
+                    <Bar dataKey="num" fill="#8884d8" />
                 </BarChart>
             </ResponsiveContainer>
         </div>
