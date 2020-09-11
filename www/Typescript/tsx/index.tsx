@@ -10,6 +10,54 @@ const AppMain = () => {
     const [kekka, setKekka] = useState("")
     const [total, setTotal] = useState(0)
     const [dataNumber, setDataNumber] = useState("")
+    const [respData, setRespData] = useState([])
+
+
+    const dataA =
+    {
+        '2018-12-01': { art: ["gras", "fas"] },
+        '2018-12-02': { art: ["gras", "fas"] },
+        '2018-12-03': { art: ["gra", "fas"] },
+        '2018-12-04': { art: ["gra", "fass"] },
+        '2018-12-05': { art: ["grva", "fas"] },
+        '2018-12-06': { art: ["gra", "fas"] },
+        '2018-12-07': { art: ["gra", "fas", "ffs"] },
+        '2018-12-08': { art: ["gra", "fasf"] },
+        '2018-12-09': { art: ["gra", "fas"] },
+        '2018-12-10': { art: ["gra", "fas"] },
+        '2018-12-11': { art: ["grsa", "fas"] },
+        '2018-12-12': { art: ["gra", "fas"] },
+        '2018-12-13': { art: ["gra", "fas"] },
+        '2018-12-14': { art: ["grfa", "fas"] },
+        '2018-12-15': { art: ["gra", "GE", "fas"] },
+        '2018-12-16': { art: ["gra", "fas"] },
+        '2018-12-17': { art: ["gra", "fas"] },
+        '2018-12-18': { art: ["gra", "fas"] },
+        '2018-12-19': { art: ["gra", "fas"] },
+        '2018-12-20': { art: ["grva", "fas"] },
+        '2018-12-21': { art: ["gra", "fas"] },
+        '2018-12-22': { art: ["gra", "fas"] },
+        '2018-12-23': { art: ["gra", "fas"] },
+        '2018-12-24': { art: ["gra", "fas"] },
+        '2018-12-25': { art: ["gra", "fas"] },
+        '2018-12-26': { art: ["grsa", "fas"] },
+        '2018-12-27': { art: ["gra", "fas"] },
+        '2018-12-28': { art: ["gra", "fass"] },
+        '2018-12-29': { art: ["gra", "fas"] },
+        '2018-12-30': { art: ["gra", "fas"] }
+    }
+
+    const response2Data = (_xhrResponseText: any) => {
+        const _respData = []
+        const _resp: any = _xhrResponseText
+        const _len: Number = Object.keys(_resp).length;
+        for (let i = 0; i < _len; i++) {
+            console.log(Object.keys(_resp))
+            const _value = _resp[Object.keys(_resp)[i]]["art"]
+            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
+        }
+        return _respData
+    }
     const kensakusuruyo = () => {
         // access to backend
         const xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -23,41 +71,9 @@ const AppMain = () => {
         xhr.timeout = 5000;
         xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
-    const data = [
-        { date: '2018-12-01', num: 10, art: ["gra", "fas"] },
-        { date: '2018-12-02', num: 12, art: ["graf", "fas"] },
-        { date: '2018-12-03', num: 18, art: ["gradc", "facs"] },
-        { date: '2018-12-04', num: 10, art: ["gra", "fas"] },
-        { date: '2018-12-05', num: 9, art: ["gra", "fas"] },
-        { date: '2018-12-06', num: 13, art: ["gra", "fas"] },
-        { date: '2018-12-07', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-08', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-09', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-10', num: 16, art: ["gra", "fass"] },
-        { date: '2018-12-11', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-12', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-13', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-14', num: 15, art: ["gra", "fafs"] },
-        { date: '2018-12-15', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-16', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-17', num: 16, art: ["grfa", "fas"] },
-        { date: '2018-12-18', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-19', num: 16, art: ["grdga", "fas"] },
-        { date: '2018-12-20', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-21', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-22', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-23', num: 16, art: ["grga", "fas"] },
-        { date: '2018-12-24', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-25', num: 6, art: ["gra", "fas"] },
-        { date: '2018-12-26', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-27', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-28', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-29', num: 16, art: ["gra", "fas"] },
-        { date: '2018-12-30', num: 16, art: ["gra", "fas"] },
-    ]
     const showDatail = () => {
         if (dataNumber == "") return (<div>aaa</div>)
-        const datum: any = data.filter((item, index) => {
+        const datum: any = respData.filter((item, index) => {
             if (item.date == dataNumber) return true;
         });
         if (datum.length != 1) return (<div>日付が不正です</div>)
@@ -70,7 +86,7 @@ const AppMain = () => {
     }
 
     return (
-        <div className="p-2 bg-light">
+        <div className="p-2 bg-light" >
             <div style={{ borderBottom: "3px double gray;" }}>
                 <div className="row p-1 px-3">
                     <div className="col-sm-12 col-lg-8 p-1">
@@ -96,7 +112,10 @@ const AppMain = () => {
                         placeholder="検索する文字を入力してください"
                         onChange={(evt) => { setKensaku(evt.target.value) }} />
                     <button className="input-group-append btn btn-outline-primary btn-lg"
-                        onClick={() => { kensakusuruyo() }}>
+                        onClick={() => {
+                            kensakusuruyo();
+                            setRespData(response2Data(dataA));
+                        }}>
                         <i className="fas fa-search mr-1"></i>検索
                     </button>
                 </div>
@@ -108,7 +127,7 @@ const AppMain = () => {
                 総ヒット数:{String(total)}[件]
             </h3>
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={data}
+                <BarChart width={400} height={400} data={respData}
                 >
                     <XAxis dataKey="date" />
                     <YAxis dataKey="num" />
@@ -124,7 +143,7 @@ const AppMain = () => {
             <div style={{ color: "#CCFFFF", border: "3px double silver", background: "#001111" }}>
                 {showDatail()}
             </div>
-        </div>
+        </div >
 
     );
 };
