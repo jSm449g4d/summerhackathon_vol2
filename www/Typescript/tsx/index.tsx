@@ -51,11 +51,14 @@ const AppMain = () => {
         const _respData = []
         const _resp: any = _xhrResponseText
         const _len: Number = Object.keys(_resp).length;
+        var _total: number = 0
         for (let i = 0; i < _len; i++) {
             console.log(Object.keys(_resp))
             const _value = _resp[Object.keys(_resp)[i]]["art"]
             _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
+            _total += _value.length
         }
+        setTotal(_total)
         return _respData
     }
     const kensakusuruyo = () => {
@@ -119,9 +122,6 @@ const AppMain = () => {
                         <i className="fas fa-search mr-1"></i>検索
                     </button>
                 </div>
-            </div>
-            <div className="d-flex flex-column text-center m-1" style={{ borderBottom: "3px double gray;" }}>
-                {kekka}
             </div>
             <h3 className="text-center m-1">
                 総ヒット数:{String(total)}[件]
