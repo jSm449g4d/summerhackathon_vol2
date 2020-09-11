@@ -10,7 +10,5 @@ werkzeug
 
 # application
 newsapi-python
-BeautifulSoup4
 urllib3
 certifi
-PyJWT
