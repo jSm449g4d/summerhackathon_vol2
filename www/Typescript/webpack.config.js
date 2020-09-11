@@ -30,5 +30,7 @@ module.exports = {
   externals: {
     react: "React",
     "react-dom": "ReactDOM",
+    'recharts':'Recharts',
+    'moment':'moment',
   },
 };
