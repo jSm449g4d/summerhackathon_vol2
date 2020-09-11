@@ -14,10 +14,14 @@ summerhackathon_vol2/
 ┣www/ (アプリ本体)  
 ┃┣html/ (公開ファイル置き場)  
 ┃┃┣static/(静的ファイル置き場)  
+┃┃┃┣src/(アプリ本体のスクリプト置き場)  
 ┃┃┃┗img/(アプリで使う画像置き場)  
+┃┃┣main.html (アプリ本体ののhtml)  
 ┃┃┣favicon.ico (ファビコン)  
 ┃┃┗robots.txt (googleクローラー等への指示)  
-┃┣templates/ (Flaskアプリで使うHTMLテンプレート置き場)  
+┃┣Typescript/ (フロントエンド関係)  
+┃┃┗tsx/ (フロントエンドソースコード置き場)  
+┃┣templates/ (Flask用テンプレート置き場)  
 ┃┣Dockerfile (環境構築方法の記述,CaaSへのデプロイ用)  
 ┃┣wsgi.py (Flask鯖本体/ルーティング等の処理実装箇所)  
 ┃┣main.py (アプリの機能実装箇所)  
@@ -39,7 +43,7 @@ summerhackathon_vol2/
 ## 開発の進め方
 1. なんか思いついたことや雑談や質問があったら、issueを立てる  
 2. 暇なときにissueで雑談する  
-3. 解決できそうならプルリク送ったりマージしたりします  
+3. 解決できそうならプルリク送ったりマージしてどんどん改良していきましょう  
 
 おわーーーーーー
 VScode万歳!
