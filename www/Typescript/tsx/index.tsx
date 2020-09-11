@@ -16,7 +16,7 @@ const AppMain = () => {
             const resp: any = JSON.parse(xhr.responseText)
             setKekka(resp["kekka"])
         };
-        xhr.timeout = 10000;
+        xhr.timeout = 5000;
         xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
 
