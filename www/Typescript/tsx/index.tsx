@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
+import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 var moment = require('moment');
 
@@ -74,14 +75,13 @@ const AppMain = () => {
                     </div>
                 </div>
             </div>
-            <div className="form-inlie">
-                <div className="form-group m-1">
-                    <h5>検索キーワード:</h5>
-                    <input className="form-control form-control-lg" type="text" name="val1" value={kensaku} placeholder="検索する文字を入力してください"
+            <div className="m-1">
+                <h5>検索キーワード:</h5>
+                <div className="input-group">
+                    <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
+                        placeholder="検索する文字を入力してください"
                         onChange={(evt) => { setKensaku(evt.target.value) }} />
-                </div>
-                <div className="d-flex flex-column text-center m-2">
-                    <button className="btn btn-outline-primary btn-lg btn-push"
+                    <button className="input-group-append btn btn-outline-primary btn-lg"
                         onClick={() => { kensakusuruyo() }}>
                         <i className="fas fa-search mr-1"></i>検索
                     </button>
