@@ -20,12 +20,16 @@ app.config['MAX_CONTENT_LENGTH'] = 10000000
 @app.route("/", methods=["GET", "POST"])
 def indexpage_show():
     try:  # Apache2.4 index
-        return flask.send_file(os.path.join("html/index.html"))
-    except:  # Flask index
-        try:
-            return importlib.import_module("main").show(flask.request)
-        except Exception as e:
-            return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
+        return flask.send_file(os.path.join("html","main.html"))
+    except Exception as e:
+        return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
+
+@app.route("/<path:name>.py", methods=["GET", "POST"])
+def py_show(name):
+    try:
+        return importlib.import_module(name.replace("/", ".").replace("..", "_")).show(flask.request)
+    except Exception as e:
+        return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
 
 # html: domain/* → www/html/*
 @app.route('/<path:name>', methods=["GET", "POST"])

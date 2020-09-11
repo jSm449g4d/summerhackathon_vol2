@@ -5,8 +5,19 @@ import './stylecheets/style.sass';
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
-    const submit=()=>{
-
+    const [kekka, setKekka] = useState("")
+    const kensakusuruyo = () => {
+        // access to backend
+        const xhr: XMLHttpRequest = new XMLHttpRequest();
+        xhr.open("POST", "/sh2_api.py", true);
+        xhr.ontimeout = () => console.error("The request timed out.");
+        xhr.onload = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) console.log(xhr.responseText);
+            const resp: any = JSON.parse(xhr.responseText)
+            setKekka(resp["kekka"])
+        };
+        xhr.timeout = 10000;
+        xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
 
     return (
@@ -25,7 +36,7 @@ const AppMain = () => {
                             <h4 style={{ fontFamily: "Courier", color: "darkgreen" }}>
                                 <i className="fas fa-flask fa-lg faa-wrench animated mr-1"></i>Flask
                         </h4>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,13 +48,13 @@ const AppMain = () => {
                 </div>
                 <div className="d-flex flex-column text-center m-2">
                     <button className="btn btn-outline-primary btn-lg btn-push"
-                        onClick={() => { }}>
+                        onClick={() => { kensakusuruyo() }}>
                         <i className="far fa-arrow-alt-circle-right mr-1"></i>提出
                     </button>
                 </div>
             </div>
             <div className="d-flex flex-column text-center m-1" style={{ borderBottom: "3px double gray;" }}>
-                kari
+                {kekka}
             </div>
         </div>
 
