@@ -1,7 +1,7 @@
 import flask
 from werkzeug.utils import secure_filename
 import json
-import news
+from . import news
 
 
 def show(request):
