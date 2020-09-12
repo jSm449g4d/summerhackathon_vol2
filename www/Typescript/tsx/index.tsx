@@ -9,7 +9,7 @@ const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
     const [kekka, setKekka] = useState("")
     const [total, setTotal] = useState(0)
-    const [dataNumber, setDataNumber] = useState("")
+    const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
 
 
@@ -75,9 +75,9 @@ const AppMain = () => {
         xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
     const showDatail = () => {
-        if (dataNumber == "") return (<div>aaa</div>)
+        if (targetDataDate == "") return (<div>キーワードを入力して下さい</div>)
         const datum: any = respData.filter((item, index) => {
-            if (item.date == dataNumber) return true;
+            if (item.date == targetDataDate) return true;
         });
         if (datum.length != 1) return (<div>日付が不正です</div>)
         const _datails = [];
@@ -85,9 +85,25 @@ const AppMain = () => {
             _datails.push(<div className="col-12 p-1">{datum[0].art[i]}</div>)
         }
         return (<div className="row p-1 px-3">{_datails}</div>)
-
     }
-
+    const showBar = () => {
+        if (respData.length < 1) return (<div></div>)
+        return (
+            <ResponsiveContainer width={'99%'} height={300}>
+                <BarChart width={400} height={400} data={respData}
+                >
+                    <XAxis dataKey="date" />
+                    <YAxis dataKey="num" />
+                    <CartesianGrid
+                        stroke="#ccc"
+                        strokeDasharray="3 3"
+                    />
+                    <Tooltip />
+                    <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
+                        onClick={(evt) => { setTargetDataDate(evt.date) }} />
+                </BarChart>
+            </ResponsiveContainer>)
+    }
     return (
         <div className="p-2 bg-light" >
             <div style={{ borderBottom: "3px double gray;" }}>
@@ -126,20 +142,9 @@ const AppMain = () => {
             <h3 className="text-center m-1">
                 総ヒット数:{String(total)}[件]
             </h3>
-            <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={respData}
-                >
-                    <XAxis dataKey="date" />
-                    <YAxis dataKey="num" />
-                    <CartesianGrid
-                        stroke="#ccc"
-                        strokeDasharray="3 3"
-                    />
-                    <Tooltip />
-                    <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
-                        onClick={(evt) => { setDataNumber(evt.date) }} />
-                </BarChart>
-            </ResponsiveContainer>
+            <div>
+                {showBar()}
+            </div>
             <div style={{ color: "#CCFFFF", border: "3px double silver", background: "#001111" }}>
                 {showDatail()}
             </div>
