@@ -10,6 +10,26 @@
 #### 管理者: 石原 (CloudRun)
 https://sh2-tlnesjcoqq-an.a.run.app
 
+## 全体構成
+![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/master/assets/zentai.png)
+
+## 使用技術
+### エディタ
+- VSCode
+### インフラ
+GCP(Cloudbuild,CloudRun) + Debian + Waitress/Flask
+### フロントエンド
+- React(Typescript)
+### バックエンド
+- Flask(Python)
+### その他
+- Docker
+- Webpack4
+- Sass
+- bootstrap4
+- fontawesome
+- newsAPI
+
 ## ディレクトリ構成
 summerhackathon_vol2/  
 ┣www/ (アプリ本体)  
