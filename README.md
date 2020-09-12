@@ -3,7 +3,8 @@
 2020/09/09から2020/09/16に開催されたハッカソンの成果物です
 
 ## 開発者
-辻田,石原,西尾,田中
+辻田,西尾: バックエンド,newsAPIクローラ  
+石原,田中: フロントエンド,インフラ  
 
 ## URL
 #### 管理者: 石原 (CloudRun)
@@ -24,7 +25,7 @@ summerhackathon_vol2/
 ┃┣templates/ (Flask用テンプレート置き場)  
 ┃┣Dockerfile (環境構築方法の記述,CaaSへのデプロイ用)  
 ┃┣wsgi.py (Flask鯖本体/ルーティング等の処理実装箇所)  
-┃┣main.py (アプリの機能実装箇所)  
+┃┣sh2_api.py (API実装箇所)  
 ┃┗requirements.txt (必要なライブラリ一覧)  
 ┣assets (README.mdで使う画像置き場)  
 ┣.gitignore (git pushでpushしたくないファイル一覧)  
