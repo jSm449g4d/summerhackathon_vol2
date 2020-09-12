@@ -11,7 +11,7 @@
 https://sh2-tlnesjcoqq-an.a.run.app
 
 ## 全体構成
-![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/zentai.png)
+![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/overview.png)
 
 ## 使用技術
 ### エディタ
