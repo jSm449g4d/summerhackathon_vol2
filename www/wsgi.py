@@ -2,11 +2,7 @@
 import os
 import sys
 import importlib
-from datetime import datetime
-import platform
-# Additional
 import flask
-import psutil
 
 
 # Flask_Startup
@@ -16,28 +12,31 @@ app = flask.Flask(
     __name__, template_folder="./templates/", static_folder='./html/static/')
 app.config['MAX_CONTENT_LENGTH'] = 10000000
 
-# Index
+
 @app.route("/", methods=["GET", "POST"])
 def indexpage_show():
-    try:  # Apache2.4 index
-        return flask.send_file(os.path.join("html","main.html"))
-    except Exception as e:
-        return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
-
-@app.route("/<path:name>.py", methods=["GET", "POST"])
-def py_show(name):
     try:
-        return importlib.import_module(name.replace("/", ".").replace("..", "_")).show(flask.request)
+        return flask.send_file(os.path.join("html", "main.html"))
     except Exception as e:
         return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
 
-# html: domain/* → www/html/*
+
+@app.route("/sh2_api.py", methods=["GET", "POST"])
+def api_show():
+    try:
+        return importlib.import_module("sh2_api").show(flask.request)
+    except Exception as e:
+        print("")
+        return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
+
+
 @app.route('/<path:name>', methods=["GET", "POST"])
 def html_show(name):
     try:
         return flask.send_file(os.path.join("html", name).replace("\\", "/").replace("..", "_"))
     except:
         return "cant_access", 404
+
 
 application = app
 
