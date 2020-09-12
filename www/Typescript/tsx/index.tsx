@@ -105,23 +105,32 @@ const AppMain = () => {
     }
     return (
         <div className="p-2 bg-light" >
-            <div style={{ borderBottom: "3px double gray;" }}>
+            <div>
                 <div className="row p-1 px-3">
                     <div className="col-sm-12 col-lg-8 p-1">
                         <div className="d-flex justify-content-center justify-content-lg-start">
-                            <h2 style={{ fontFamily: "Impact", color: "indigo" }}>
-                                <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2 Team3の成果物へようこそ!
+                            <h2 className="slidein-2" style={{ fontFamily: "Impact", color: "indigo" }}>
+                                <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2
                         </h2>
                         </div>
                     </div>
                     <div className="col-sm-12 col-lg-4 p-1">
                         <div className="d-flex justify-content-center justify-content-lg-end">
                             <h4 style={{ fontFamily: "Courier", color: "darkgreen" }}>
-                                <i className="fas fa-flask fa-lg faa-wrench animated mr-1"></i>Flask
+                                <i className="fas fa-flask fa-lg flask-icon mr-1"></i>Flask通信
                         </h4>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="text-center"
+                style={{ border: "3px double silver", backgroundColor: "rgba(230,230,250,0.5)" }}>
+                「時間を軸とした、ホットのキーワードの可視化」をおこなうアプリです!<br />
+                キーワード検索で、何時どれだけ記事にされたのか、どんな記事があったのかが分かります!<br />
+                <button className="btn btn-link btn-push"
+                    onClick={() => { window.location.href = "https://github.com/jSm449g4d/summerhackathon_vol2" }}>
+                    <i className="fab fa-github mr-1"></i>Githubのリポジトリ
+                </button>
             </div>
             <div className="m-1">
                 <h5>検索キーワード:</h5>

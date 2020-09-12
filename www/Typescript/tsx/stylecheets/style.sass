@@ -117,3 +117,12 @@ $nine: 9
   @extend .slidein-1
   border-top: solid 1px darkred
   border-bottom: solid 1px darkred
+
+.flask-icon
+  transition: 0.3s
+  animation: fa-btn-rotanime 0.5s ease infinite alternate
+@keyframes fa-btn-rotanime
+  0%
+    transform: rotate(15deg)
+  100%
+    transform: rotate(-15deg)
