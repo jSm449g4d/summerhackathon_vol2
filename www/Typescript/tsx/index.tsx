@@ -53,7 +53,6 @@ const AppMain = () => {
         const _len: Number = Object.keys(_resp).length;
         var _total: number = 0
         for (let i = 0; i < _len; i++) {
-            console.log(Object.keys(_resp))
             const _value = _resp[Object.keys(_resp)[i]]["art"]
             _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
             _total += _value.length

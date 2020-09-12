@@ -1,8 +1,6 @@
 import flask
 from werkzeug.utils import secure_filename
 import json
-from . import news
-
 
 def show(request):
     return_dict = {}

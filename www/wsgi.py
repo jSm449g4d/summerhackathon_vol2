@@ -26,6 +26,7 @@ def api_show():
     try:
         return importlib.import_module("sh2_api").show(flask.request)
     except Exception as e:
+        print("")
         return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
 
 
