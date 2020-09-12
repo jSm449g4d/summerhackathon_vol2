@@ -46,4 +46,4 @@ summerhackathon_vol2/
 3. 解決できそうならプルリク送ったりマージしてどんどん改良していきましょう  
 
 VScode万歳!!!  
-develop!
+develop!!!
