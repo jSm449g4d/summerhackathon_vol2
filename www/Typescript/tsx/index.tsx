@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import { string } from 'prop-types';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 
 // IndexPage (Not use)
 const AppMain = () => {
+    console.log("れんだりんぐ")
     const [kensaku, setKensaku] = useState("")
     const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
     const [message, setMessage] = useState("キーワードを入力してください")
-
 
     const response2Data = (_xhrResponseText: any) => {
         const _respData = []
@@ -46,8 +45,7 @@ const AppMain = () => {
         });
         if (datum.length != 1) { return (<div></div>) }
         const _datails = [];
-        _datails.push(<h4 className="col-12 p-1 text-center" style={{ backgroundColor: "rgba(250,250,250,0.8)" }}>{targetDataDate}の時間帯の記事</h4>
-        )
+        _datails.push(<h4 className="col-12 p-1 text-center" style={{ backgroundColor: "rgba(250,250,250,0.8)" }}>{targetDataDate}の時間帯の記事</h4>)
         for (let i = 0; i < datum[0].arts.length; i++) {
             _datails.push(
                 <div className="col-12 col-lg-6 p-1">
@@ -65,24 +63,25 @@ const AppMain = () => {
                 </div>
             )
         }
+        _datails.push(
+            <div className="col-12 p-1 text-center">
+                <a className="btn btn-lg btn-push btn-outline-primary" href="#index_top">↑トップへ戻る</a>
+            </div>)
         return (<div className="row p-1 px-3">{_datails}</div>)
     }
     const showBar = () => {
         if (respData.length < 1) return (<div></div>)
         return (
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={respData}
-                >
+                <BarChart width={400} height={400} data={respData}>
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="num" />
-                    <CartesianGrid
-                        stroke="#ccc"
-                        strokeDasharray="3 3"
-                    />
+                    <YAxis dataKey="num" label={{ value: 'Number of articles', angle: -90, position: 'insideLeft' }} />
+                    <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <Tooltip />
                     <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
-                        onClick={(evt) => { setTargetDataDate(evt.date) }} />
-
+                        onClick={(evt) => { setTargetDataDate(evt.date) }} >
+                        <LabelList dataKey="num" position="top" />
+                    </Bar>
                 </BarChart>
             </ResponsiveContainer>)
     }
@@ -112,13 +111,15 @@ const AppMain = () => {
     }
     return (
         <div className="p-2 bg-light" >
-            <div>
+            <div id="index_top">
                 <div className="row p-1 px-3">
                     <div className="col-sm-12 col-lg-8 p-1">
                         <div className="d-flex justify-content-center justify-content-lg-start">
-                            <h2 className="slidein-2" style={{ fontFamily: "Impact", color: "indigo" }}>
-                                <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2
-                            </h2>
+                            <a className="a-nolink" onClick={(evt) => { window.location.href = "https://tech-study-group.connpass.com/event/187008/" }}>
+                                <h2 className="slidein-2 btn-push" style={{ fontFamily: "Impact", color: "indigo" }}>
+                                    <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2
+                                </h2>
+                            </a>
                         </div>
                     </div>
                     <div className="col-sm-12 col-lg-4 p-1">
