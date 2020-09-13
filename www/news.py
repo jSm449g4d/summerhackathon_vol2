@@ -8,6 +8,7 @@ def push_news_data(keyword):
     #headlines = newsapi.get_top_headlines(q='テスト')
     # 過去のニュースを取得
     headlines = newsapi.get_everything(q=keyword,sort_by='publishedAt',page_size=100)
+
     # フロント側が欲しいデータの形
 
     #data_kari = {
@@ -16,19 +17,21 @@ def push_news_data(keyword):
     #print(data_kari)
 
     news_list = []
-    news_data = {}
     data = {}
     if not headlines['articles']:
         # 記事が見つからない場合
         print("記事は見つかりませんでした")
     else:
+        # 最初の日時　データの振り分けの際に利用するチェックデータ
         check_time = datetime.datetime.fromisoformat(headlines['articles'][0]['publishedAt'].replace('Z', ''))
+
         # 帰ってきたデータのそれぞれのkeyを表示
         #print(headlines['articles'][0].keys())
         # 取得したニュースの全てを表示
         #print(headlines['articles'])
         # 一番最初の記事の日時を取得
         #print(headlines['articles'][0]['publishedAt'])
+
         # 記事一つ一つ確認していいく
         for news in headlines['articles']:
         
@@ -50,5 +53,5 @@ def push_news_data(keyword):
     return data
 
 if __name__ == "__main__":
-    test = push_news_data("テスト")
+    test = push_news_data("阿部")
     print(test)

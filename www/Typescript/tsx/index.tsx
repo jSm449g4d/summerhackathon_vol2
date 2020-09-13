@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-var moment = require('moment');
 
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
-    const [total, setTotal] = useState(0)
     const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
 
@@ -16,13 +14,10 @@ const AppMain = () => {
         const _respData = []
         const _resp: any = _xhrResponseText
         const _len: Number = Object.keys(_resp).length;
-        var _total: number = 0
         for (let i = 0; i < _len; i++) {
-            const _value = _resp[Object.keys(_resp)[i]]["art"]
-            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
-            _total += _value.length
+            const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
+            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, arts: _value })
         }
-        setTotal(_total)
         return _respData
     }
     const kensakusuruyo = () => {
@@ -45,8 +40,22 @@ const AppMain = () => {
         });
         if (datum.length != 1) { setTargetDataDate(""); return (<div></div>) }
         const _datails = [];
-        for (let i = 0; i < datum[0].art.length; i++) {
-            _datails.push(<div className="col-12 p-1">{datum[0].art[i]}</div>)
+        for (let i = 0; i < datum[0].arts.length; i++) {
+            _datails.push(
+                <div className="col-12 p-1">
+                    <div className="btn-col" style={{ background: "rgba(255,255,255,0.6)" }}>
+                        <a className="a-nolink" onClick={(evt) => { window.location.href = datum[0].arts[i]["url"] }}>
+                            <div className="d-flex flex-column" style={{ height: "380px" }}>
+                                <h5>{datum[0].arts[i]["title"]}</h5>
+                                <div className="d-flex flex-column flex-grow-1">
+                                    <img className="img-fluid" src={datum[0].arts[i]["imageUrl"]} style={{ height: 150, objectFit: "contain" }} />
+                                    {datum[0].arts[i]["description"]}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            )
         }
         return (<div className="row p-1 px-3">{_datails}</div>)
     }
@@ -67,6 +76,28 @@ const AppMain = () => {
                         onClick={(evt) => { setTargetDataDate(evt.date) }} />
                 </BarChart>
             </ResponsiveContainer>)
+    }
+    const textFormErrorModal = () => {
+        return (
+            <div className="modal fade" id={"index_textformerror_modal"} role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header d-flex justify-content-between">
+                            <h3 className="modal-title">
+                                エラー
+                            </h3>
+                        </div>
+                        <div className="modal-body">
+                            <div className="d-flex flex-column text-center">
+                                入力が不正です
+                                <button className="btn btn-danger btn-lg btn-push my-1" type="button" data-dismiss="modal">
+                                    閉じる
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)
     }
     return (
         <div className="p-2 bg-light" >
@@ -118,21 +149,26 @@ const AppMain = () => {
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
                         placeholder="検索する文字を入力してください"
                         onChange={(evt) => { setKensaku(evt.target.value) }} />
-                    <button className="input-group-append btn btn-outline-primary btn-lg"
-                        onClick={() => {
-                            kensakusuruyo();
-                        }}>
-                        <i className="fas fa-search mr-1"></i>検索
-                    </button>
+                    {kensaku == "" ?
+                        <button className="input-group-append btn btn-outline-primary btn-lg" disabled>
+                            <i className="fas fa-search mr-1"></i>検索
+                        </button>
+                        :
+                        <button className="input-group-append btn btn-outline-primary btn-lg"
+                            onClick={() => { kensakusuruyo(); }}>
+                            <i className="fas fa-search mr-1"></i>検索
+                        </button>
+                    }
                 </div>
             </div>
             <h3 className="text-center m-1">
-                総ヒット数:{String(total)}[件]
+                {0 < respData.length ? <div>期間:{respData[0].date}~{respData[respData.length - 1].date}</div> : <div></div>}
+
             </h3>
             <div>
                 {showBar()}
             </div>
-            <div style={{ color: "#CCFFFF", border: "3px double silver", background: "#001111" }}>
+            <div style={{ border: "3px double silver", backgroundColor: "rgba(230,240,240,0.5)" }}>
                 {showDatail()}
             </div>
         </div >
