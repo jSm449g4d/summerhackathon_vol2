@@ -27,8 +27,11 @@ if __name__ == "__main__":
             '2018-12-02': {"art": ["gras", "fas"]},
             '2018-12-03': {"art": ["gra", "fas"]}, }
     print(data_kari)
-    print(type(data_kari))
-    d = {}
+
+    news_list = []
+    news_data = {}
+    data = {}
+    check_time = datetime.datetime.fromisoformat(headlines['articles'][0]['publishedAt'].replace('Z', ''))
     if not headlines['articles']:
         # 記事が見つからない場合
         print("記事は見つかりませんでした")
@@ -44,9 +47,12 @@ if __name__ == "__main__":
         
             # 受け取ったニュースの日時を型に変更 
             time = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
-            time_s = time.isoformat()
-
-            d[time_s] = 1
-        
-            #print(time)
-        print(d)
+            if abs(check_time - time).days == 1:
+                time_string = time.isoformat()
+                news_data["art"] = news_list
+                data[time_string] = news_data
+                check_time = time
+                news_list = []
+            else:
+                news_list.append(news['title'])
+        print(data)
