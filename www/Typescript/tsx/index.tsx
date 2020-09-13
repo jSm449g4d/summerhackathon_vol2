@@ -15,8 +15,8 @@ const AppMain = () => {
         const _resp: any = _xhrResponseText
         const _len: Number = Object.keys(_resp).length;
         for (let i = 0; i < _len; i++) {
-            const _value = _resp[Object.keys(_resp)[i]]["art"]
-            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
+            const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
+            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, arts: _value })
         }
         return _respData
     }
@@ -40,8 +40,9 @@ const AppMain = () => {
         });
         if (datum.length != 1) { setTargetDataDate(""); return (<div></div>) }
         const _datails = [];
-        for (let i = 0; i < datum[0].art.length; i++) {
-            _datails.push(<div className="col-12 p-1">{datum[0].art[i]}</div>)
+        for (let i = 0; i < datum[0].arts.length; i++) {
+            _datails.push(<div className="col-12 p-1">{datum[0].arts[i]["description"]}</div>)
+            _datails.push(<div className="col-12 p-1">{datum[0].arts[i]["url"]}</div>)
         }
         return (<div className="row p-1 px-3">{_datails}</div>)
     }
