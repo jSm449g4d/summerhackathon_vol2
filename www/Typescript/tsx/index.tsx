@@ -41,8 +41,21 @@ const AppMain = () => {
         if (datum.length != 1) { setTargetDataDate(""); return (<div></div>) }
         const _datails = [];
         for (let i = 0; i < datum[0].arts.length; i++) {
-            _datails.push(<div className="col-12 p-1">{datum[0].arts[i]["description"]}</div>)
-            _datails.push(<div className="col-12 p-1">{datum[0].arts[i]["url"]}</div>)
+            _datails.push(
+                <div className="col-12 p-1">
+                    <div className="btn-col" style={{ background: "rgba(255,255,255,0.6)" }}>
+                        <a className="a-nolink" onClick={(evt) => { window.location.href = datum[0].arts[i]["url"] }}>
+                            <div className="d-flex flex-column" style={{ height: "380px" }}>
+                                <h5>{datum[0].arts[i]["title"]}</h5>
+                                <div className="d-flex flex-column flex-grow-1">
+                                    <img className="img-fluid" src={datum[0].arts[i]["imageUrl"]} style={{ height: 150, objectFit: "contain" }} />
+                                    {datum[0].arts[i]["description"]}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            )
         }
         return (<div className="row p-1 px-3">{_datails}</div>)
     }
@@ -155,7 +168,7 @@ const AppMain = () => {
             <div>
                 {showBar()}
             </div>
-            <div style={{ color: "#CCFFFF", border: "3px double silver", background: "#001111" }}>
+            <div style={{ border: "3px double silver", backgroundColor: "rgba(230,240,240,0.5)" }}>
                 {showDatail()}
             </div>
         </div >
