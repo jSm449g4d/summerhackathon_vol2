@@ -18,6 +18,7 @@ def push_news_data(keyword):
 
     news_list = []
     data = {}
+    news_data = {}
     if not headlines['articles']:
         # 記事が見つからない場合
         print("記事は見つかりませんでした")
