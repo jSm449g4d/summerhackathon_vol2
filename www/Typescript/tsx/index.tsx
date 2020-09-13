@@ -76,14 +76,21 @@ const AppMain = () => {
                         <div className="d-flex justify-content-center justify-content-lg-start">
                             <h2 className="slidein-2" style={{ fontFamily: "Impact", color: "indigo" }}>
                                 <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2
-                        </h2>
+                            </h2>
                         </div>
                     </div>
                     <div className="col-sm-12 col-lg-4 p-1">
                         <div className="d-flex justify-content-center justify-content-lg-end">
+                            <h4 className="titlelogo">
+                                チーム: =はじめてのFlask=
+                            </h4>
+                        </div>
+                    </div>
+                    <div className="col-12 p-1">
+                        <div className="d-flex justify-content-center">
                             <h4 style={{ fontFamily: "Courier", color: "darkgreen" }}>
                                 <i className="fas fa-flask fa-lg flask-icon mr-1"></i>Flask通信
-                        </h4>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -92,6 +99,14 @@ const AppMain = () => {
                 style={{ border: "3px double silver", backgroundColor: "rgba(230,230,250,0.5)" }}>
                 「時間を軸とした、ホットのキーワードの可視化」をおこなうアプリです!<br />
                 キーワード検索で、何時どれだけ記事にされたのか、どんな記事があったのかが分かります!<br />
+                <div className="text-center slidein-2-reverse" style={{ backgroundColor: "rgba(250,250,250,0.8)" }}>
+                    使用技術:
+                    <i className="fab fa-python mx-1"></i>:Flask/Python
+                    <i className="fab fa-react mx-1"></i>(React/Typescript)
+                    <i className="fab fa-bootstrap mx-1"></i>
+                    <i className="fab fa-sass mx-1"></i>
+                    <i className="fab fa-docker mx-1"></i>
+                </div>
                 <button className="btn btn-link btn-push"
                     onClick={() => { window.location.href = "https://github.com/jSm449g4d/summerhackathon_vol2" }}>
                     <i className="fab fa-github mr-1"></i>Githubのリポジトリ
