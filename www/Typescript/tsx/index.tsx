@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-var moment = require('moment');
 
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
-    const [total, setTotal] = useState(0)
     const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
 
@@ -16,13 +14,10 @@ const AppMain = () => {
         const _respData = []
         const _resp: any = _xhrResponseText
         const _len: Number = Object.keys(_resp).length;
-        var _total: number = 0
         for (let i = 0; i < _len; i++) {
             const _value = _resp[Object.keys(_resp)[i]]["art"]
             _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, art: _value })
-            _total += _value.length
         }
-        setTotal(_total)
         return _respData
     }
     const kensakusuruyo = () => {
@@ -127,7 +122,8 @@ const AppMain = () => {
                 </div>
             </div>
             <h3 className="text-center m-1">
-                総ヒット数:{String(total)}[件]
+                {0 < respData.length ? <div>期間:{respData[0].date}~{respData[respData.length - 1].date}</div> : <div></div>}
+
             </h3>
             <div>
                 {showBar()}
