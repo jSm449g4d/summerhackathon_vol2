@@ -43,7 +43,7 @@ const AppMain = () => {
         const datum: any = respData.filter((item, index) => {
             if (item.date == targetDataDate) return true;
         });
-        if (datum.length != 1) return (<div>日付が不正です</div>)
+        if (datum.length != 1) { setTargetDataDate(""); return (<div></div>) }
         const _datails = [];
         for (let i = 0; i < datum[0].art.length; i++) {
             _datails.push(<div className="col-12 p-1">{datum[0].art[i]}</div>)
