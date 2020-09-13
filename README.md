@@ -1,4 +1,6 @@
-# summerhackathon_vol2
+# summerhackathon_vol2  
+## Flask通信  
+![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/tops.png)
 **現在開発中!!**  
 2020/09/09から2020/09/16に開催されたハッカソンの成果物です  
 
@@ -72,5 +74,3 @@ summerhackathon_vol2/
 1. なんか思いついたことや雑談や質問があったら、issueを立てる  
 2. 暇なときにissueで雑談する  
 3. 解決できそうならプルリク送ったりマージしてどんどん改良していきましょう  
-
-おわーーーーーー
