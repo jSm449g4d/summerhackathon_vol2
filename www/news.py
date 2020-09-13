@@ -1,13 +1,13 @@
 from newsapi import NewsApiClient
 import datetime
 
-def push_news_data():
+def push_news_data(keyword):
     # クライアントを初期化
     newsapi = NewsApiClient(api_key='e79240c2cdf64ef8860194efcbb65ca0')
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
     # 過去のニュースを取得
-    headlines = newsapi.get_everything(q='テスト',sort_by='publishedAt',page_size=80)
+    headlines = newsapi.get_everything(q=keyword,sort_by='publishedAt',page_size=100)
     # フロント側が欲しいデータの形
     #data_kari = {
     #        '2018-12-01': {"art": ["詳細記事", "詳細記事"]},
