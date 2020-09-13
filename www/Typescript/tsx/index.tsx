@@ -2,25 +2,31 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { string } from 'prop-types';
 
 // IndexPage (Not use)
 const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
     const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
+    const [message, setMessage] = useState("キーワードを入力してください")
 
 
     const response2Data = (_xhrResponseText: any) => {
         const _respData = []
         const _resp: any = _xhrResponseText
-        const _len: Number = Object.keys(_resp).length;
+        const _len: number = Object.keys(_resp).length;
+        if (0 == _len) { setMessage("検索結果がありませんでした"); return [] }
+        setMessage("")
         for (let i = 0; i < _len; i++) {
             const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
             _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, arts: _value })
         }
+        setTargetDataDate(Object.keys(_resp)[_len - 1])
         return _respData
     }
     const kensakusuruyo = () => {
+        setMessage("searching")
         // access to backend
         const xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("POST", "/sh2_api.py", true);
@@ -34,19 +40,21 @@ const AppMain = () => {
         xhr.send(JSON.stringify({ "kensaku": kensaku }));
     }
     const showDatail = () => {
-        if (targetDataDate == "") return (<div>キーワードを入力して下さい</div>)
+        if (targetDataDate == "") return (<div></div>)
         const datum: any = respData.filter((item, index) => {
             if (item.date == targetDataDate) return true;
         });
-        if (datum.length != 1) { setTargetDataDate(""); return (<div></div>) }
+        if (datum.length != 1) { return (<div></div>) }
         const _datails = [];
+        _datails.push(<h4 className="col-12 p-1 text-center" style={{ backgroundColor: "rgba(250,250,250,0.8)" }}>{targetDataDate}の時間帯の記事</h4>
+        )
         for (let i = 0; i < datum[0].arts.length; i++) {
             _datails.push(
-                <div className="col-12 p-1">
+                <div className="col-12 col-lg-6 p-1">
                     <div className="btn-col" style={{ background: "rgba(255,255,255,0.6)" }}>
                         <a className="a-nolink" onClick={(evt) => { window.location.href = datum[0].arts[i]["url"] }}>
-                            <div className="d-flex flex-column" style={{ height: "380px" }}>
-                                <h5>{datum[0].arts[i]["title"]}</h5>
+                            <div className="d-flex flex-column" style={{ height: "400px" }}>
+                                <h5 className="text-center">{datum[0].arts[i]["title"]}</h5>
                                 <div className="d-flex flex-column flex-grow-1">
                                     <img className="img-fluid" src={datum[0].arts[i]["imageUrl"]} style={{ height: 150, objectFit: "contain" }} />
                                     {datum[0].arts[i]["description"]}
@@ -74,30 +82,33 @@ const AppMain = () => {
                     <Tooltip />
                     <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
                         onClick={(evt) => { setTargetDataDate(evt.date) }} />
+
                 </BarChart>
             </ResponsiveContainer>)
     }
-    const textFormErrorModal = () => {
+    const showMessage = () => {
+        if (message == "searching") return (<h3 className="text-center m-1"><i className="fas fa-search m-1"></i>検索中...</h3>)
+        if (message != "") return (<h3 className="text-center m-1">{message}</h3>)
+        if (0 < respData.length)
+            return (<h3 className="text-center m-1">期間:{respData[0].date}~{respData[respData.length - 1].date}</h3>)
+        return (<div></div>)
+    }
+    const showSearchButton = () => {
+        if (kensaku == "")
+            return (
+                <button className="input-group-append btn btn-outline-primary btn-lg" disabled>
+                    <i className="fas fa-search mr-1"></i>検索
+                </button>)
+        if (message == "searching")
+            return (
+                <button className="input-group-append btn btn-outline-primary btn-lg" disabled>
+                    <i className="fas fa-search mr-1"></i>検索中...
+                </button>)
         return (
-            <div className="modal fade" id={"index_textformerror_modal"} role="dialog" aria-hidden="true">
-                <div className="modal-dialog modal-lg" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header d-flex justify-content-between">
-                            <h3 className="modal-title">
-                                エラー
-                            </h3>
-                        </div>
-                        <div className="modal-body">
-                            <div className="d-flex flex-column text-center">
-                                入力が不正です
-                                <button className="btn btn-danger btn-lg btn-push my-1" type="button" data-dismiss="modal">
-                                    閉じる
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>)
+            <button className="input-group-append btn btn-outline-primary btn-lg" id="index_kensaku_button"
+                onClick={() => { kensakusuruyo(); }}>
+                <i className="fas fa-search mr-1"></i>検索
+            </button>)
     }
     return (
         <div className="p-2 bg-light" >
@@ -148,23 +159,13 @@ const AppMain = () => {
                 <div className="input-group">
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
                         placeholder="検索する文字を入力してください"
-                        onChange={(evt) => { setKensaku(evt.target.value) }} />
-                    {kensaku == "" ?
-                        <button className="input-group-append btn btn-outline-primary btn-lg" disabled>
-                            <i className="fas fa-search mr-1"></i>検索
-                        </button>
-                        :
-                        <button className="input-group-append btn btn-outline-primary btn-lg"
-                            onClick={() => { kensakusuruyo(); }}>
-                            <i className="fas fa-search mr-1"></i>検索
-                        </button>
-                    }
+                        onChange={(evt) => { setKensaku(evt.target.value) }}
+                        onKeyPress={(e) => { if (e.key == 'Enter' && kensaku != "") kensakusuruyo() }}
+                    />
+                    {showSearchButton()}
                 </div>
             </div>
-            <h3 className="text-center m-1">
-                {0 < respData.length ? <div>期間:{respData[0].date}~{respData[respData.length - 1].date}</div> : <div></div>}
-
-            </h3>
+            {showMessage()}
             <div>
                 {showBar()}
             </div>
