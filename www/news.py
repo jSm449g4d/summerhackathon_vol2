@@ -10,6 +10,7 @@ def push_news_data(keyword):
     headlines = newsapi.get_everything(q=keyword,sort_by='publishedAt',page_size=100)
 
     # フロント側が欲しいデータの形
+
     #data_kari = {
     #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
     #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
@@ -42,7 +43,13 @@ def push_news_data(keyword):
                 check_time = news_time
                 news_list = []
             else:
-                news_list.append({news['title'],news['url']})
+                news_data['title'] = news['title']
+                news_data['description'] = news['description']
+                news_data['url'] = news['url']
+                news_data['imageUrl'] = news['urlToImage']
+                news_list.append(news_data)
+                news_data = {}
+
     return data
 
 if __name__ == "__main__":
