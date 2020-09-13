@@ -63,6 +63,28 @@ const AppMain = () => {
                 </BarChart>
             </ResponsiveContainer>)
     }
+    const textFormErrorModal = () => {
+        return (
+            <div className="modal fade" id={"index_textformerror_modal"} role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header d-flex justify-content-between">
+                            <h3 className="modal-title">
+                                エラー
+                            </h3>
+                        </div>
+                        <div className="modal-body">
+                            <div className="d-flex flex-column text-center">
+                                入力が不正です
+                                <button className="btn btn-danger btn-lg btn-push my-1" type="button" data-dismiss="modal">
+                                    閉じる
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)
+    }
     return (
         <div className="p-2 bg-light" >
             <div>
@@ -113,12 +135,16 @@ const AppMain = () => {
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
                         placeholder="検索する文字を入力してください"
                         onChange={(evt) => { setKensaku(evt.target.value) }} />
-                    <button className="input-group-append btn btn-outline-primary btn-lg"
-                        onClick={() => {
-                            kensakusuruyo();
-                        }}>
-                        <i className="fas fa-search mr-1"></i>検索
-                    </button>
+                    {kensaku == "" ?
+                        <button className="input-group-append btn btn-outline-primary btn-lg" disabled>
+                            <i className="fas fa-search mr-1"></i>検索
+                        </button>
+                        :
+                        <button className="input-group-append btn btn-outline-primary btn-lg"
+                            onClick={() => { kensakusuruyo(); }}>
+                            <i className="fas fa-search mr-1"></i>検索
+                        </button>
+                    }
                 </div>
             </div>
             <h3 className="text-center m-1">
