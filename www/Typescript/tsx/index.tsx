@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
+import { AppWidgetHead, AppWidgetFoot } from "./components/widget";
+
 
 // IndexPage (Not use)
 const AppMain = () => {
@@ -65,7 +67,7 @@ const AppMain = () => {
         }
         _datails.push(
             <div className="col-12 p-1 text-center">
-                <a className="btn btn-lg btn-push btn-outline-primary" href="#index_top">↑トップへ戻る</a>
+                <a className="btn btn-lg btn-push btn-outline-primary" href="#App-widget-head">↑トップへ戻る</a>
             </div>)
         return (<div className="row p-1 px-3">{_datails}</div>)
     }
@@ -111,33 +113,7 @@ const AppMain = () => {
     }
     return (
         <div className="p-2 bg-light" >
-            <div id="index_top">
-                <div className="row p-1 px-3">
-                    <div className="col-sm-12 col-lg-8 p-1">
-                        <div className="d-flex justify-content-center justify-content-lg-start">
-                            <a className="a-nolink" onClick={(evt) => { window.location.href = "https://tech-study-group.connpass.com/event/187008/" }}>
-                                <h2 className="slidein-2 btn-push" style={{ fontFamily: "Impact", color: "indigo" }}>
-                                    <i className="fas fa-book mr-1"></i>2020年 サマーハッカソンvol2
-                                </h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div className="col-sm-12 col-lg-4 p-1">
-                        <div className="d-flex justify-content-center justify-content-lg-end">
-                            <h4 className="titlelogo">
-                                チーム: =はじめてのFlask=
-                            </h4>
-                        </div>
-                    </div>
-                    <div className="col-12 p-1">
-                        <div className="d-flex justify-content-center">
-                            <h4 style={{ fontFamily: "Courier", color: "darkgreen" }}>
-                                <i className="fas fa-flask fa-lg flask-icon mr-1"></i>Flask通信
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {AppWidgetHead()}
             <div className="text-center"
                 style={{ border: "3px double silver", backgroundColor: "rgba(230,230,250,0.5)" }}>
                 「時間を軸とした、ホットのキーワードの可視化」をおこなうアプリです!<br />
@@ -173,6 +149,7 @@ const AppMain = () => {
             <div style={{ border: "3px double silver", backgroundColor: "rgba(230,240,240,0.5)" }}>
                 {showDatail()}
             </div>
+            {AppWidgetFoot()}
         </div >
 
     );
