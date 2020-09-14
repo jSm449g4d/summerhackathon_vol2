@@ -30,7 +30,8 @@ const AppMain = () => {
         setMessage("searching")
         // access to backend
         const xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.open("POST", "/news_api.py", true);
+        //xhr.open("POST", "/news_api.py", true);
+        xhr.open("POST", "/sh2_api.py", true);
         xhr.ontimeout = () => console.error("The request timed out.");
         xhr.onload = () => {
             if (xhr.readyState === 4 && xhr.status === 200) console.log(xhr.responseText);
@@ -52,7 +53,7 @@ const AppMain = () => {
             _datails.push(
                 <div className="col-12 col-lg-6 p-1">
                     <div className="btn-col" style={{ background: "rgba(255,255,255,0.6)" }}>
-                        <a className="a-nolink" onClick={(evt) => { window.location.href = datum[0].arts[i]["url"] }}>
+                        <a className="a-nolink" href={datum[0].arts[i]["url"]} >
                             <div className="d-flex flex-column" style={{ height: "400px" }}>
                                 <h5 className="text-center">{datum[0].arts[i]["title"]}</h5>
                                 <div className="d-flex flex-column flex-grow-1">
