@@ -30,7 +30,7 @@ const AppMain = () => {
         setMessage("searching")
         // access to backend
         const xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.open("POST", "/sh2_api.py", true);
+        xhr.open("POST", "/news_api.py", true);
         xhr.ontimeout = () => console.error("The request timed out.");
         xhr.onload = () => {
             if (xhr.readyState === 4 && xhr.status === 200) console.log(xhr.responseText);
