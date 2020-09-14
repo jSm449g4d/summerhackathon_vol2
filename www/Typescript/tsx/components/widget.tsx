@@ -39,6 +39,6 @@ export const AppWidgetHead = () => {
 
 export const AppWidgetFoot = () => {
     return (
-        <div id="App-widget-foot">   ゆゆうた　脱糞     </div>
+        <div id="App-widget-foot" style={{color:"rgba(60,60,60,0)"}}>   ゆゆうた　脱糞     </div>
     );
 }
