@@ -1,13 +1,43 @@
-# summerhackathon_vol2
+# summerhackathon_vol2  
+## Flask通信  
+![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/tops.png)
 **現在開発中!!**  
-2020/09/09から2020/09/16に開催されたハッカソンの成果物です
+2020/09/09から2020/09/16に開催されたハッカソンの成果物です  
+
+## ミッション
+情報可視化という手段で、世の中をより簡単に理解出来るようにすることで、生活を便利にする!  
+
+## どんなアプリ?
+「時間を軸とした、ホットのキーワードの可視化」をおこなうアプリです!  
+キーワード検索で、何時どれだけ記事にされたのか、どんな記事があったのかが分かります!  
 
 ## 開発者
-辻田,石原,西尾,田中
+辻田,西尾: バックエンド,newsAPIクローラ  
+石原,田中: フロントエンド,インフラ  
 
 ## URL
 #### 管理者: 石原 (CloudRun)
 https://sh2-tlnesjcoqq-an.a.run.app
+
+## 全体構成
+![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/overview.png)
+
+## 使用技術
+### エディタ
+- VSCode
+### インフラ
+GCP(Cloudbuild,CloudRun) + Debian + Waitress/Flask
+### フロントエンド
+- React(Typescript)
+### バックエンド
+- Flask(Python)
+### その他
+- Docker
+- Webpack4
+- Sass
+- bootstrap4
+- fontawesome
+- newsAPI
 
 ## ディレクトリ構成
 summerhackathon_vol2/  
@@ -24,7 +54,7 @@ summerhackathon_vol2/
 ┃┣templates/ (Flask用テンプレート置き場)  
 ┃┣Dockerfile (環境構築方法の記述,CaaSへのデプロイ用)  
 ┃┣wsgi.py (Flask鯖本体/ルーティング等の処理実装箇所)  
-┃┣main.py (アプリの機能実装箇所)  
+┃┣sh2_api.py (API実装箇所)  
 ┃┗requirements.txt (必要なライブラリ一覧)  
 ┣assets (README.mdで使う画像置き場)  
 ┣.gitignore (git pushでpushしたくないファイル一覧)  
@@ -44,6 +74,3 @@ summerhackathon_vol2/
 1. なんか思いついたことや雑談や質問があったら、issueを立てる  
 2. 暇なときにissueで雑談する  
 3. 解決できそうならプルリク送ったりマージしてどんどん改良していきましょう  
-
-VScode万歳!!!  
-develop!!!
