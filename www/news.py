@@ -38,7 +38,7 @@ def push_news_data(keyword):
         
             # 受け取ったニュースの日時をdatetime型に変更 
             news_time = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
-            if abs(check_time - news_time).days == 1:
+            if abs(check_time - news_time).days >= 1:
                 time_string = news_time.isoformat()
                 data[time_string] = news_list
                 check_time = news_time
