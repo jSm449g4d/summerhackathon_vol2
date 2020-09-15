@@ -52,16 +52,15 @@ export const AppWidgetFoot = () => {
                     <div className="col-12">
                         <ul className="list-unstyled text-small">
                             <div className="d-flex justify-content-center">
-                                <li><a className="text-muted" href="#">サマーハッカソン〜オンラインでLVupする夏合宿vol.2〜</a></li>
-
+                                <li><a className="text-muted" href="#">
+                                    サマーハッカソン〜オンラインでLVupする夏合宿vol.2〜
+                                    </a></li>
                             </div>
-
-                           
                         </ul>
-
                         <div className="d-flex justify-content-center">
-                            <small className="d-block mb-3 text-muted">Copyright &copy; 2020 「はじめてのflask」. all rights reserved.
-</small>
+                            <small className="d-block mb-3 text-muted">
+                                Copyright &copy; 2020 「はじめてのflask」. all rights reserved.
+                                </small>
                         </div>
                     </div>
                 </div>
