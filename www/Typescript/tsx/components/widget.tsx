@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../stylecheets/widgetstyle.sass';
 
 // お願い
 // AppWidgetHead()の<div id="App-widget-head">のidは変更しないでください
@@ -41,9 +42,7 @@ export const AppWidgetFoot = () => {
     return (
 
         <div id="App-widget-foot">
-            <div style={{ color: "rgba(60,60,60,0)" }}>
-                ゆゆうた　脱糞
-                </div>
+            <div className="btn-push2" style={{ color: "rgba(60,60,60,0.5)" }}>ゆゆうた　脱糞</div>
         </div>
     );
 }
