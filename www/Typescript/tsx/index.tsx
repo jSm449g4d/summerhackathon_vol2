@@ -80,13 +80,13 @@ const AppMain = () => {
         if (respData.length < 1) return (<div></div>)
         return (
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={respData}>
+                <BarChart width={400} height={400} data={respData} onClick={(evt)=>{alert(evt.date)}}>
                     <XAxis dataKey="date" />
                     <YAxis dataKey="num" label={{ value: 'Number of articles', angle: -90, position: 'insideLeft' }} />
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <Tooltip />
                     <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
-                        onClick={(evt) => { setTargetDataDate(evt.date) }} >
+                        onMouseEnter={(evt) => { setTargetDataDate(evt.date) }} >
                         <LabelList dataKey="num" position="top" />
                     </Bar>
                 </BarChart>
