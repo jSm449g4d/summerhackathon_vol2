@@ -33,18 +33,20 @@ def push_news_data(keyword):
     newsapi = NewsApiClient(api_key='e79240c2cdf64ef8860194efcbb65ca0')
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
-    # 過去のニュースを取得
+    # 過去のニュースを取得 yahooニュースを指定
     headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='yahoo.co.jp')
+    # 朝日ニュースを指定
     headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='asahi.com')
-    # フロント側が欲しいデータの形
-    print(headlines)
-    headlines = {**headlines2,**headlines}
-    print(headlines)
+    # できれば結合したい 
+    #headlines = {**headlines2,**headlines}
 
+    # フロント側が欲しいデータの形
     #data_kari = {
     #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
     #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
     #print(data_kari)
+
+    # ニュース元のヒット総件数 
     #yahoo.co.jp 32988
     #natalie.mu 4382
     #asahi.com 4155
