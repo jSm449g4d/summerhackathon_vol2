@@ -23,7 +23,7 @@ export const AppWidgetHead = () => {
                 <div className="col-sm-12 col-lg-4 p-1">
                     <div className="d-flex justify-content-center justify-content-lg-end">
                         <h4 className="titlelogo">
-                            チーム: =はじめてのFlask=
+                            チーム:  はじめてのFlask
                         </h4>
                     </div>
                 </div>
@@ -43,7 +43,29 @@ export const AppWidgetFoot = () => {
     return (
 
         <div id="App-widget-foot">
-            <div className="btn-push2" style={{ color: "rgba(60,60,60,0.001)" }}>ゆゆうた　脱糞</div>
+            <footer className="pt-4 my-md-5 pt-md-5 border-top">
+                <div className="btn-push2" style={{ color: "rgba(60,60,60,0)" }}>ゆゆうた　脱糞
+                     </div>
+
+
+                <div className="row">
+                    <div className="col-12">
+                        <ul className="list-unstyled text-small">
+                            <div className="d-flex justify-content-center">
+                                <li><a className="text-muted" href="#">サマーハッカソン〜オンラインでLVupする夏合宿vol.2〜</a></li>
+
+                            </div>
+
+                           
+                        </ul>
+
+                        <div className="d-flex justify-content-center">
+                            <small className="d-block mb-3 text-muted">Copyright &copy; 2020 「はじめてのflask」. all rights reserved.
+</small>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }
