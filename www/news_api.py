@@ -5,7 +5,7 @@ import importlib
 from newsapi import NewsApiClient
 import datetime
 
-newspy=importlib.import_module("news")
+newspy=importlib.import_module("news_api")
 
 def show(request):
     return_dict = {}
