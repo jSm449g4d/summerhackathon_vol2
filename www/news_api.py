@@ -34,14 +34,28 @@ def push_news_data(keyword):
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
     # 過去のニュースを取得
-    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
-
+    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='yahoo.co.jp')
+    headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='asahi.com')
     # フロント側が欲しいデータの形
+    print(headlines)
+    headlines = {**headlines2,**headlines}
+    print(headlines)
 
     #data_kari = {
     #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
     #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
     #print(data_kari)
+    #yahoo.co.jp 32988
+    #natalie.mu 4382
+    #asahi.com 4155
+    #mainichi.jp 304
+    #nikkei.com 1217
+    #itmedia.co.jp 2586
+    #jiji.com 1406
+    #sankei.com 92
+    #moguravr.com 5
+    #gekisaka.jp 3
+
     sort_time_news_list = []
     news_list = []
     data = {}
@@ -89,5 +103,5 @@ def push_news_data(keyword):
     return data
 
 if __name__ == "__main__":
-    test = push_news_data("test")
+    test = push_news_data("阿部")
     #print(test)
