@@ -14,6 +14,10 @@ const AppMain = () => {
     const [message, setMessage] = useState("キーワードを入力してください")
 
     const response2Data = (_xhrResponseText: any) => {
+        const sortRespData = (a: any, b: any) => {
+            return parseInt(String(a.date).replace(/[^0-9^\.]/g, "")) -
+                parseInt(String(b.date).replace(/[^0-9^\.]/g, ""));
+        }
         const _respData = []
         const _resp: any = _xhrResponseText
         const _len: number = Object.keys(_resp).length;
@@ -23,7 +27,8 @@ const AppMain = () => {
             const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
             _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, arts: _value })
         }
-        setTargetDataDate(Object.keys(_resp)[_len - 1])
+        _respData.sort(sortRespData)
+        setTargetDataDate(Object.keys(_resp)[0])
         return _respData
     }
     const kensakusuruyo = () => {
