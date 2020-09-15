@@ -34,7 +34,7 @@ def push_news_data(keyword):
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
     # 過去のニュースを取得
-    headlines = newsapi.get_everything(q=keyword,sort_by='publishedAt',page_size=100)
+    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
 
     # フロント側が欲しいデータの形
 
@@ -42,7 +42,7 @@ def push_news_data(keyword):
     #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
     #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
     #print(data_kari)
-
+    sort_time_news_list = []
     news_list = []
     data = {}
     news_data = {}
@@ -50,25 +50,30 @@ def push_news_data(keyword):
         # 記事が見つからない場合
         print("記事は見つかりませんでした")
     else:
-        # 最初の日時　データの振り分けの際に利用するチェックデータ
-        check_time = datetime.datetime.fromisoformat(headlines['articles'][0]['publishedAt'].replace('Z', ''))
+        for news in headlines['articles']:
+            # 受け取ったニュースの日時をdatetime型に変更 
+            news_datetime = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
+            news['publishedAt'] = news_datetime
+            sort_time_news_list.append(news)
+        
+        # 日時順に変換する
+        sort_time_news_list = sorted(sort_time_news_list, key=lambda x: x['publishedAt'])
 
-        # 帰ってきたデータのそれぞれのkeyを表示
-        #print(headlines['articles'][0].keys())
-        # 取得したニュースの全てを表示
-        #print(headlines['articles'])
-        # 一番最初の記事の日時を取得
-        #print(headlines['articles'][0]['publishedAt'])
+        #記事の最初の日時と最後の日時を取得
+        first_datetime = sort_time_news_list[0]['publishedAt']
+        last_datetime = sort_time_news_list[-1]['publishedAt']
+        # 振り分けしていくための日時データ
+        check_datetime = first_datetime
+        bind_datetime = abs(first_datetime - last_datetime) / 10
 
         # 記事一つ一つ確認していいく
-        for news in headlines['articles']:
-        
-            # 受け取ったニュースの日時をdatetime型に変更 
-            news_time = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
-            if abs(check_time - news_time).days == 1:
-                time_string = news_time.isoformat()
+        for news in sort_time_news_list:
+            news_datetime = news['publishedAt']
+
+            if abs(check_datetime - news_datetime) >= bind_datetime:
+                time_string = news_datetime.isoformat()
                 data[time_string] = news_list
-                check_time = news_time
+                check_datetime = news_datetime
                 news_list = []
             else:
                 news_data['title'] = news['title']
@@ -77,9 +82,12 @@ def push_news_data(keyword):
                 news_data['imageUrl'] = news['urlToImage']
                 news_list.append(news_data)
                 news_data = {}
+        if news_list:
+            time_string = news_datetime.isoformat()
+            data[time_string] = news_list
 
     return data
 
 if __name__ == "__main__":
-    test = push_news_data("阿部")
-    print(test)
+    test = push_news_data("test")
+    #print(test)
