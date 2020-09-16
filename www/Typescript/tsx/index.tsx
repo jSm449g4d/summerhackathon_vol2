@@ -44,7 +44,7 @@ const AppMain = () => {
             setRespData(response2Data(resp));
         };
         xhr.timeout = 5000;
-        let _jpOnly = "False"; if (jpOnly == true) { _jpOnly = "Ture" }
+        let _jpOnly = "False"; if (jpOnly == true) { _jpOnly = "True" }
         xhr.send(JSON.stringify({ "kensaku": kensaku, "jponly": _jpOnly }));
     }
     const showDatail = () => {
