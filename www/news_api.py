@@ -4,6 +4,7 @@ import json
 import importlib
 from newsapi import NewsApiClient
 import datetime
+from datetime import timedelta
 
 newspy=importlib.import_module("news_api")
 
@@ -85,11 +86,15 @@ def push_news_data(keyword,jponly):
                       mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp,hatenadiary.com,techable.jp,\
                       sankei.com,moguravr.com,gekisaka.jp,hateblo.jp,voyagegroup.com,atmarkit.co.jp'
         # 過去のニュースを取得 ニュース記事を日本のみに限定
-        headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
-        #print("headlines",headlines['totalResults'])
+        headlines = newsapi.get_everything(qintitle=keyword,q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
+        print("headlines",headlines['totalResults'])
+        #if headlines['totalResults'] > 2000:
+            #dt_now = datetime.datetime.now() + timedelta(days=-20)
+            #print(dt_now)
+            #headlines = newsapi.get_everything(qintitle=keyword,q=keyword,sort_by='relevancy',page_size=100,domains=news_domain,from_param=dt_now)
     else:
         # ニュースを指定 海外のニュースも含めて検索
-        headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
+        headlines = newsapi.get_everything(qintitle=keyword,q=keyword,sort_by='relevancy',page_size=100)
         #print("headlines2",headlines2['totalResults'])
 
     sort_time_news_list = []
@@ -115,7 +120,7 @@ def push_news_data(keyword,jponly):
         last_unixtime = sort_time_news_list[-1]['publishedAt']
         # 振り分けしていくための日時データ
         check_unixtime = first_unixtime
-        bind_unixtime = abs(first_unixtime - last_unixtime) / 10
+        bind_unixtime = abs(first_unixtime - last_unixtime) / 12
         # 記事一つ一つ確認していいく
         for news in sort_time_news_list:
             # ニュースの日時を取得
