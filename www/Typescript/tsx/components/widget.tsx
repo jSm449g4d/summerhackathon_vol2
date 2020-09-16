@@ -48,7 +48,7 @@ export const AppWidgetFoot = () => {
                      </div>
 
 
-                <div className="row">
+                <div className="row ftcol">
                     <div className="col-12">
                         <ul className="list-unstyled text-small">
                             <div className="d-flex justify-content-center">
