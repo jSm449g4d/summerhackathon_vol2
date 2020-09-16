@@ -34,20 +34,6 @@ def push_news_data(keyword):
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
 
-    # 過去のニュースを取得
-    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
-
-    # ニュースを指定
-    #headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='yahoo.co.jp,livedoor.jp,getnews.jp')
-    # できれば結合したい 
-    #headlines = {**headlines2,**headlines}
-
-    # フロント側が欲しいデータの形
-    #data_kari = {
-    #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
-    #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
-    #print(data_kari)
-
     # ニュース元のヒット総件数 
     #yahoo.co.jp 32988
     # livedoor.jp 13545
@@ -55,26 +41,50 @@ def push_news_data(keyword):
     # nhk.or.jp 5441
     #natalie.mu 4382
     #asahi.com 4155
+    #www.2nn.jp 16691,
+
     # newsweekjapan.jp 2659
     #techcrunch.com 2122
     #itmedia.co.jp 2586
+    #blogos.com 2033
     #jiji.com 1406
     # esuteru.com 1635,
     # tbs.co.jp 1731
     #nikkei.com 1217
     # alfalfalfa.com 1264,
+    
+    # mainichi.jp 304
+    # hatenablog.com 351
+    # cocolog-nifty.com 329
+    # huffingtonpost.jp 444
+    # srad.jp 331
+    # qetic.jp 382,
+    # cookpad.com  495
+    
+    #voyagegroup.com 4
     #sankei.com 92
     #moguravr.com 5
     #gekisaka.jp 3
-    #mainichi.jp 304
-    # jin115.com
-    # hatenablog.com 351
-    # cocolog-nifty.com 329
-    # srad.jp 331
-    # qetic.jp 382,
-    # huffingtonpost.jp 444
-    # cookpad.com  495
-    #voyagegroup.com 4
+    #jin115.com エラーで無理
+    #hateblo.jp 87
+
+    #ニュースのドメインを日本の記事に指定
+    news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,www.2nn.jp,\
+                   newsweekjapan.jp,techcrunch.com,techcrunch.com,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
+                   mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp'
+    # 過去のニュースを取得 ニュース記事を日本のみに限定
+    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
+    #print("headlines",headlines['totalResults'])
+
+    # ニュースを指定
+    #headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
+    #print("headlines2",headlines2['totalResults'])
+
+    # フロント側が欲しいデータの形
+    #data_kari = {
+    #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
+    #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
+    #print(data_kari)
 
     sort_time_news_list = []
     news_list = []
