@@ -21,7 +21,7 @@ def show(request):
     if request.method == "POST":
         if 'jponly' in input_dict:
             jponly=input_dict["jponly"].translate(str.maketrans("\"\'\\/<>%`?;", '””￥_〈〉％”？；'))
-            if jponly == 'Ture':
+            if jponly == True:
                 jponly = True
             else:
                 jponly = False
