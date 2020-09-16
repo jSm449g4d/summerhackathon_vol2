@@ -21,7 +21,7 @@ def show(request):
     if request.method == "POST":
         if 'jponly' in input_dict:
             jponly=input_dict["jponly"].translate(str.maketrans("\"\'\\/<>%`?;", '””￥_〈〉％”？；'))
-            if jponly == True:
+            if jponly == 'True':
                 jponly = True
             else:
                 jponly = False
@@ -78,7 +78,7 @@ def push_news_data(keyword,jponly):
     #jin115.com エラーで無理
     #hateblo.jp 87
     #atmarkit.co.jp 136
-    if jponly:
+    if jponly == True:
         #ニュースのドメインを日本の記事に指定
         news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,prtimes.jp,\
                       newsweekjapan.jp,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
