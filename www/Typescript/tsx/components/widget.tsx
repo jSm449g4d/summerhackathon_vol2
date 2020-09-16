@@ -10,7 +10,7 @@ import '../stylecheets/widgetstyle.sass';
 export const AppWidgetHead = () => {
     return (
         <div id="App-widget-head">
-            <div className="row p-1 px-3">
+            <div className="row p-1 px-3 ftcol">
                 <div className="col-sm-12 col-lg-8 p-1">
                     <div className="d-flex justify-content-center justify-content-lg-start">
                         <a className="a-nolink" onClick={(evt) => { window.location.href = "https://tech-study-group.connpass.com/event/187008/" }}>
@@ -43,7 +43,7 @@ export const AppWidgetFoot = () => {
     return (
 
         <div id="App-widget-foot">
-            <footer className="pt-4 my-md-5 pt-md-5 border-top">
+            <footer className="pt-4 my-md-5 pt-md-5 border-top ftcol">
                 <div className="btn-push2" style={{ color: "rgba(60,60,60,0)" }}>ゆゆうた　脱糞
                      </div>
 
@@ -52,7 +52,7 @@ export const AppWidgetFoot = () => {
                     <div className="col-12">
                         <ul className="list-unstyled text-small">
                             <div className="d-flex justify-content-center">
-                                <li><a className="text-muted" href="#">
+                                <li><a className="text-muted" href="https://talent.supporterz.jp/events/c30aa3bd-7c41-4d25-b4d2-a0ed32dd6b6f/">
                                     サマーハッカソン〜オンラインでLVupする夏合宿vol.2〜
                                     </a></li>
                             </div>
