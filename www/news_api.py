@@ -19,16 +19,23 @@ def show(request):
          }
 
     if request.method == "POST":
+        if 'jponly' in input_dict:
+            jponly=input_dict["jponly"].translate(str.maketrans("\"\'\\/<>%`?;", '””￥_〈〉％”？；'))
+            if jponly == 'Ture':
+                jponly = True
+            else:
+                jponly = False
+        else:
+            jponly = False
         if 'kensaku' in input_dict:
             kensaku=input_dict["kensaku"].translate(str.maketrans("\"\'\\/<>%`?;", '””￥_〈〉％”？；'))
-            #return_dict = data_kari_old # 仮実装
-            return_dict = newspy.push_news_data(kensaku)
+            return_dict = newspy.push_news_data(kensaku,jponly)
         return json.dumps(return_dict, ensure_ascii=False), 200
 
     return "ok", 200
 
 
-def push_news_data(keyword):
+def push_news_data(keyword,jponly):
     # クライアントを初期化
     newsapi = NewsApiClient(api_key='e79240c2cdf64ef8860194efcbb65ca0')
     #トップニュースを取得
@@ -67,24 +74,18 @@ def push_news_data(keyword):
     #gekisaka.jp 3
     #jin115.com エラーで無理
     #hateblo.jp 87
-
-    #ニュースのドメインを日本の記事に指定
-    news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,www.2nn.jp,\
-                   newsweekjapan.jp,techcrunch.com,techcrunch.com,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
-                   mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp'
-    # 過去のニュースを取得 ニュース記事を日本のみに限定
-    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
-    #print("headlines",headlines['totalResults'])
-
-    # ニュースを指定
-    #headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
-    #print("headlines2",headlines2['totalResults'])
-
-    # フロント側が欲しいデータの形
-    #data_kari = {
-    #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
-    #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
-    #print(data_kari)
+    if jponly:
+        #ニュースのドメインを日本の記事に指定
+        news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,www.2nn.jp,\
+                      newsweekjapan.jp,techcrunch.com,techcrunch.com,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
+                      mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp'
+        # 過去のニュースを取得 ニュース記事を日本のみに限定
+        headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
+        #print("headlines",headlines['totalResults'])
+    else:
+        # ニュースを指定 海外のニュースも含めて検索
+        headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
+        #print("headlines2",headlines2['totalResults'])
 
     sort_time_news_list = []
     news_list = []
