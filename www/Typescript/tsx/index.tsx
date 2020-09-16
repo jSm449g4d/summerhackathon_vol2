@@ -12,6 +12,7 @@ const AppMain = () => {
     const [kensaku, setKensaku] = useState("")
     const [targetDataDate, setTargetDataDate] = useState("")
     const [respData, setRespData] = useState([])
+    const [jpOnly, setJpOnly] = useState(true)
     const [message, setMessage] = useState("キーワードを入力してください")
 
     const response2Data = (_xhrResponseText: any) => {
@@ -43,7 +44,8 @@ const AppMain = () => {
             setRespData(response2Data(resp));
         };
         xhr.timeout = 5000;
-        xhr.send(JSON.stringify({ "kensaku": kensaku }));
+        let _jpOnly = "False"; if (jpOnly == true) { _jpOnly = "Ture" }
+        xhr.send(JSON.stringify({ "kensaku": kensaku, "jponly": _jpOnly }));
     }
     const showDatail = () => {
         if (targetDataDate == "") return (<div></div>)
@@ -145,7 +147,14 @@ const AppMain = () => {
                 </button>
             </div>
             <div className="m-1">
-                <h5>検索キーワード:</h5>
+                <div className="d-flex flex-start">
+                    <h5 className="mx-2">検索キーワード:</h5>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="index_jponly_check"
+                            defaultChecked={jpOnly} checked={jpOnly} onChange={evt => setJpOnly(!jpOnly)} />
+                        <label style={{ color: "darkcyan" }} htmlFor="index_jponly_check"><h5>日本語検索のみ</h5></label>
+                    </div>
+                </div>
                 <div className="input-group">
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
                         placeholder="検索する文字を入力してください"
