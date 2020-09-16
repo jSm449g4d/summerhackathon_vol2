@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 import { AppWidgetHead, AppWidgetFoot } from "./components/widget";
+import { Unixtime2String } from "./components/util";
 
 
 // IndexPage (Not use)
@@ -15,8 +16,7 @@ const AppMain = () => {
 
     const response2Data = (_xhrResponseText: any) => {
         const sortRespData = (a: any, b: any) => {
-            return parseInt(String(a.date).replace(/[^0-9^\.]/g, "")) -
-                parseInt(String(b.date).replace(/[^0-9^\.]/g, ""));
+            return Number(String(a.date)) - Number(String(b.date));
         }
         const _respData = []
         const _resp: any = _xhrResponseText
@@ -25,7 +25,7 @@ const AppMain = () => {
         setMessage("")
         for (let i = 0; i < _len; i++) {
             const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
-            _respData.push({ date: [Object.keys(_resp)[i]], num: _value.length, arts: _value })
+            _respData.push({ date: Unixtime2String(Number([Object.keys(_resp)[i]])), num: _value.length, arts: _value })
         }
         _respData.sort(sortRespData)
         setTargetDataDate(Object.keys(_resp)[0])
@@ -80,12 +80,12 @@ const AppMain = () => {
         if (respData.length < 1) return (<div></div>)
         return (
             <ResponsiveContainer width={'99%'} height={300}>
-                <BarChart width={400} height={400} data={respData} onClick={(evt)=>{alert(evt.date)}}>
+                <BarChart width={400} height={400} data={respData}>
                     <XAxis dataKey="date" />
                     <YAxis dataKey="num" label={{ value: 'Number of articles', angle: -90, position: 'insideLeft' }} />
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <Tooltip />
-                    <Bar dataKey="num" fill="#8884d8" style={{ cursor: "pointer" }}
+                    <Bar dataKey="num" fill="#8884d8"
                         onMouseEnter={(evt) => { setTargetDataDate(evt.date) }} >
                         <LabelList dataKey="num" position="top" />
                     </Bar>
@@ -93,10 +93,18 @@ const AppMain = () => {
             </ResponsiveContainer>)
     }
     const showMessage = () => {
-        if (message == "searching") return (<h3 className="text-center m-1"><i className="fas fa-search m-1"></i>検索中...</h3>)
-        if (message != "") return (<h3 className="text-center m-1">{message}</h3>)
+        if (message == "searching") return (<h4 className="text-center m-1"><i className="fas fa-search m-1"></i>検索中...</h4>)
+        if (message != "") return (<h4 className="text-center m-1">{message}</h4>)
         if (0 < respData.length)
-            return (<h3 className="text-center m-1">期間:{respData[0].date}~{respData[respData.length - 1].date}</h3>)
+            return (
+                <h4 className="text-center m-1 text-center">
+                    期間
+                    <div className="row">
+                        <div className="col-12 col-lg-5">{respData[0].date}</div>
+                        <div className="d-none d-lg-block col-lg-2">-</div>
+                        <div className="col-12 col-lg-5">{respData[respData.length - 1].date}</div>
+                    </div>
+                </h4>)
         return (<div></div>)
     }
     const showSearchButton = () => {
