@@ -87,22 +87,23 @@ def push_news_data(keyword):
         # 記事一つ一つ確認していいく
         for news in headlines['articles']:
             # 受け取ったニュースの日時をdatetime型に変更 
-            news_datetime = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
-            news['publishedAt'] = news_datetime
+            news_unixtime = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
+            news_unixtime = news_unixtime.timestamp()
+            news['publishedAt'] = news_unixtime
             sort_time_news_list.append(news)
         # 日時順に変換する
         sort_time_news_list = sorted(sort_time_news_list, key=lambda x: x['publishedAt'])
 
         #記事の最初の日時と最後の日時を取得
-        first_datetime = sort_time_news_list[0]['publishedAt']
-        last_datetime = sort_time_news_list[-1]['publishedAt']
+        first_unixtime = sort_time_news_list[0]['publishedAt']
+        last_unixtime = sort_time_news_list[-1]['publishedAt']
         # 振り分けしていくための日時データ
-        check_datetime = first_datetime
-        bind_datetime = abs(first_datetime - last_datetime) / 10
+        check_unixtime = first_unixtime
+        bind_unixtime = abs(first_unixtime - last_unixtime) / 10
         # 記事一つ一つ確認していいく
         for news in sort_time_news_list:
             # ニュースの日時を取得
-            news_datetime = news['publishedAt']
+            news_unixtime = news['publishedAt']
 
             news_data['title'] = news['title']
             news_data['description'] = news['description']
@@ -110,15 +111,15 @@ def push_news_data(keyword):
             news_data['imageUrl'] = news['urlToImage']
             news_list.append(news_data)
 
-            if abs(check_datetime - news_datetime) >= bind_datetime:
-                time_string = news_datetime.isoformat()
+            if abs(check_unixtime - news_unixtime) >= bind_unixtime:
+                time_string = str(int(news_unixtime)*1000)
                 data[time_string] = news_list
-                check_datetime = news_datetime
+                check_unixtime = news_unixtime
                 news_list = []
 
             news_data = {}
         if news_list:
-            time_string = news_datetime.isoformat()
+            time_string = str(int(news_unixtime)*1000)
             data[time_string] = news_list
     return data
 
