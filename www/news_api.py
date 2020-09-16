@@ -39,6 +39,7 @@ def push_news_data(keyword):
     headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='asahi.com')
     # できれば結合したい 
     #headlines = {**headlines2,**headlines}
+    #print(headlines['totalResults'])
 
     # フロント側が欲しいデータの形
     #data_kari = {
@@ -81,23 +82,23 @@ def push_news_data(keyword):
         # 振り分けしていくための日時データ
         check_datetime = first_datetime
         bind_datetime = abs(first_datetime - last_datetime) / 10
-
         # 記事一つ一つ確認していいく
         for news in sort_time_news_list:
+            # ニュースの日時を取得
             news_datetime = news['publishedAt']
+
+            news_data['title'] = news['title']
+            news_data['description'] = news['description']
+            news_data['url'] = news['url']
+            news_data['imageUrl'] = news['urlToImage']
+            news_list.append(news_data)
 
             if abs(check_datetime - news_datetime) >= bind_datetime:
                 time_string = news_datetime.isoformat()
                 data[time_string] = news_list
                 check_datetime = news_datetime
                 news_list = []
-            else:
-                news_data['title'] = news['title']
-                news_data['description'] = news['description']
-                news_data['url'] = news['url']
-                news_data['imageUrl'] = news['urlToImage']
-                news_list.append(news_data)
-                news_data = {}
+            news_data = {}
         if news_list:
             time_string = news_datetime.isoformat()
             data[time_string] = news_list
