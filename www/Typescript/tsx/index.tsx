@@ -26,10 +26,10 @@ const AppMain = () => {
         setMessage("")
         for (let i = 0; i < _len; i++) {
             const _value = _resp[Object.keys(_resp)[i]]//{"description":"aaa","url":"bbb"},...
-            _respData.push({ date: Unixtime2String(Number([Object.keys(_resp)[i]])), num: _value.length, arts: _value })
+            _respData.push({ date: Unixtime2String(Number(Object.keys(_resp)[i])), num: _value.length, arts: _value })
         }
         _respData.sort(sortRespData)
-        setTargetDataDate(Object.keys(_resp)[0])
+        setTargetDataDate(Unixtime2String(Number(Object.keys(_resp)[0])))
         return _respData
     }
     const kensakusuruyo = () => {
