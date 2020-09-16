@@ -34,24 +34,49 @@ def push_news_data(keyword):
     #トップニュースを取得
     #headlines = newsapi.get_top_headlines(q='テスト')
 
-    # 過去のニュースを取得 yahooニュースを指定
-    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='yahoo.co.jp')
-    # 朝日ニュースを指定
-    headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='asahi.com')
+    # 過去のニュースを取得
+    headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100)
+
+    # ニュースを指定
+    #headlines2 = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains='yahoo.co.jp,livedoor.jp,getnews.jp')
     # できれば結合したい 
     #headlines = {**headlines2,**headlines}
-    #print(headlines['totalResults'])
-
- 
-
 
     # フロント側が欲しいデータの形
-
     #data_kari = {
     #        '2018-12-01': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],
     #        '2018-12-02': [{"description":"aaa","url":"bbb"},{"description":"bbb"}],}
     #print(data_kari)
 
+    # ニュース元のヒット総件数 
+    #yahoo.co.jp 32988
+    # livedoor.jp 13545
+    # getnews.jp 6444,
+    # nhk.or.jp 5441
+    #natalie.mu 4382
+    #asahi.com 4155
+    # newsweekjapan.jp 2659
+    #techcrunch.com 2122
+    #itmedia.co.jp 2586
+    #jiji.com 1406
+    # esuteru.com 1635,
+    # tbs.co.jp 1731
+    #nikkei.com 1217
+    # alfalfalfa.com 1264,
+    #sankei.com 92
+    #moguravr.com 5
+    #gekisaka.jp 3
+    #mainichi.jp 304
+    # jin115.com
+    # hatenablog.com 351
+    # cocolog-nifty.com 329
+    # srad.jp 331
+    # qetic.jp 382,
+    # huffingtonpost.jp 444
+    # cookpad.com  495
+    #voyagegroup.com 4
+
+    sort_time_news_list = []
     news_list = []
     data = {}
     news_data = {}
@@ -59,20 +84,12 @@ def push_news_data(keyword):
         # 記事が見つからない場合
         print("記事は見つかりませんでした")
     else:
-        # 最初の日時　データの振り分けの際に利用するチェックデータ
-        check_time = datetime.datetime.fromisoformat(headlines['articles'][0]['publishedAt'].replace('Z', ''))
-        check_time = check_time.timestamp()
-
-        # 帰ってきたデータのそれぞれのkeyを表示
-        #print(headlines['articles'][0].keys())
-        # 取得したニュースの全てを表示
-        #print(headlines['articles'])
-        # 一番最初の記事の日時を取得
-        #print(headlines['articles'][0]['publishedAt'])
         # 記事一つ一つ確認していいく
         for news in headlines['articles']:
-        
-
+            # 受け取ったニュースの日時をdatetime型に変更 
+            news_datetime = datetime.datetime.fromisoformat(news['publishedAt'].replace('Z', ''))
+            news['publishedAt'] = news_datetime
+            sort_time_news_list.append(news)
         # 日時順に変換する
         sort_time_news_list = sorted(sort_time_news_list, key=lambda x: x['publishedAt'])
 
@@ -95,19 +112,14 @@ def push_news_data(keyword):
 
             if abs(check_datetime - news_datetime) >= bind_datetime:
                 time_string = news_datetime.isoformat()
-
-
                 data[time_string] = news_list
-                check_time = news_time
+                check_datetime = news_datetime
                 news_list = []
 
             news_data = {}
         if news_list:
             time_string = news_datetime.isoformat()
             data[time_string] = news_list
-
-  
-
     return data
 
 if __name__ == "__main__":
