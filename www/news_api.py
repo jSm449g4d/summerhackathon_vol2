@@ -43,30 +43,33 @@ def push_news_data(keyword,jponly):
 
     # ニュース元のヒット総件数 
     #yahoo.co.jp 32988
+    # prtimes.jp 20401,
     # livedoor.jp 13545
     # getnews.jp 6444,
     # nhk.or.jp 5441
     #natalie.mu 4382
     #asahi.com 4155
-    #www.2nn.jp 16691,
+    #www.2nn.jp 16691, 2ch系 削除
 
     # newsweekjapan.jp 2659
-    #techcrunch.com 2122
+    #techcrunch.com 2122 英語系
     #itmedia.co.jp 2586
     #blogos.com 2033
     #jiji.com 1406
     # esuteru.com 1635,
     # tbs.co.jp 1731
     #nikkei.com 1217
-    # alfalfalfa.com 1264,
+    # alfalfalfa.com 1264, コメント系
     
     # mainichi.jp 304
+    #hatenadiary.com  587
     # hatenablog.com 351
     # cocolog-nifty.com 329
     # huffingtonpost.jp 444
     # srad.jp 331
     # qetic.jp 382,
     # cookpad.com  495
+    # techable.jp 314
     
     #voyagegroup.com 4
     #sankei.com 92
@@ -74,11 +77,13 @@ def push_news_data(keyword,jponly):
     #gekisaka.jp 3
     #jin115.com エラーで無理
     #hateblo.jp 87
+    #atmarkit.co.jp 136
     if jponly:
         #ニュースのドメインを日本の記事に指定
-        news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,www.2nn.jp,\
-                      newsweekjapan.jp,techcrunch.com,techcrunch.com,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
-                      mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp'
+        news_domain = 'yahoo.co.jp,livedoor.jp,getnews.jp,nhk.or.jp,natalie.mu,asahi.com,prtimes.jp,\
+                      newsweekjapan.jp,itmedia.co.jp,jiji.com,esuteru.com,tbs.co.jp,nikkei.com,alfalfalfa.com,blogos.com,\
+                      mainichi.jp,hatenablog.com,huffingtonpost.jp,cookpad.com,cocolog-nifty.com,srad.jp,qetic.jp,hatenadiary.com,techable.jp,\
+                      sankei.com,moguravr.com,gekisaka.jp,hateblo.jp,voyagegroup.com,atmarkit.co.jp'
         # 過去のニュースを取得 ニュース記事を日本のみに限定
         headlines = newsapi.get_everything(q=keyword,sort_by='relevancy',page_size=100,domains=news_domain)
         #print("headlines",headlines['totalResults'])
