@@ -113,9 +113,16 @@ const AppMain = () => {
                 <h4 className="text-center m-1 text-center">
                     期間
                     <div className="row">
-                        <div className="col-12 col-lg-5">{Unixtime2String(respData[0].date)}</div>
+                        <div className="col-12 col-lg-5">
+                            <div className="d-lg-flex justify-content-lg-end">
+                                {Unixtime2String(respData[0].date)}
+                            </div>
+                        </div>
                         <div className="d-none d-lg-block col-lg-2">-</div>
-                        <div className="col-12 col-lg-5">{Unixtime2String(respData[respData.length - 1].date)}</div>
+                        <div className="col-12 col-lg-5">
+                            <div className="d-lg-flex justify-content-lg-start">{Unixtime2String(respData[respData.length - 1].date)}
+                            </div>
+                        </div>
                     </div>
                 </h4>)
         return (<div></div>)
