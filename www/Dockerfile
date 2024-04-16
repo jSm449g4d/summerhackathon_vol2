@@ -7,20 +7,20 @@ WORKDIR $APP
 COPY . .
 RUN apt update -q;apt upgrade -yq
 
+# npmSetup
+RUN apt install npm -yq
+RUN npm install -g n
+RUN n latest
+RUN npm i -g npm
+
 # Javascript
 WORKDIR $APP/html/static
-RUN apt install npm -yq
-RUN npm install -g npm
-RUN npm install --save jquery@3.5.1 popper.js@1.16.1 bootstrap react react-dom react-bootstrap && \
-    npm install --save @fortawesome/fontawesome-free lazysizes prop-types recharts moment
+RUN npm i
+
 # Typescript
 WORKDIR $APP/Typescript
-RUN npm install --save-dev @types/jquery @types/popper.js @types/bootstrap && \
-    npm install --save-dev @types/react @types/react-dom @types/react-bootstrap @types/prop-types @types/recharts @types/moment
 # Webpack
-RUN npm install --save-dev typescript webpack webpack-cli @types/webpack-env @types/webpack-env webpack-glob-entry && \
-    npm install --save-dev ts-loader source-map-loader style-loader css-loader && \
-    npm install --save-dev node-sass sass-loader
+RUN npm i -D
 RUN npx webpack
 
 # Python3
