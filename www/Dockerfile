@@ -7,20 +7,16 @@ WORKDIR $APP
 COPY . .
 RUN apt update -q;apt upgrade -yq
 
-# npmSetup
-RUN apt install npm -yq
-RUN npm install -g n
-RUN n latest
-RUN npm i -g npm
-
 # Javascript
 WORKDIR $APP/html/static
-RUN npm i
+RUN apt install npm -yq
+RUN npm install -g npm
+RUN npm install
 
 # Typescript
 WORKDIR $APP/Typescript
 # Webpack
-RUN npm i -D
+RUN npm install
 RUN npx webpack
 
 # Python3
