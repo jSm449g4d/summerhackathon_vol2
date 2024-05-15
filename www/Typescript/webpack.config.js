@@ -17,8 +17,8 @@ module.exports = {
 
   module: {
     rules: [
-      { exclude: /node_modules/, test: /\.ts(x?)$/, use: ["ts-loader"] },
-      { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
+      { exclude: /node_modules/, test: /\.ts(x?)$/, loaders: ["ts-loader"] },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
       {
         test: /\.s[ac]ss$/,
@@ -28,7 +28,9 @@ module.exports = {
   },
 
   externals: {
-    'react': "React",
+    react: "React",
     "react-dom": "ReactDOM",
+    'recharts':'Recharts',
+    'moment':'moment',
   },
 };

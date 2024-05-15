@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../stylecheets/widgetstyle.sass';
 
-//作業 田中
 // お願い
 // AppWidgetHead()の<div id="App-widget-head">のidは変更しないでください
 // AppWidgetFoot()の<div id="App-widget-foot">のidは変更しないでください
@@ -10,7 +8,7 @@ import '../stylecheets/widgetstyle.sass';
 export const AppWidgetHead = () => {
     return (
         <div id="App-widget-head">
-            <div className="row p-1 px-3 ftcol">
+            <div className="row p-1 px-3">
                 <div className="col-sm-12 col-lg-8 p-1">
                     <div className="d-flex justify-content-center justify-content-lg-start">
                         <a className="a-nolink" onClick={(evt) => { window.location.href = "https://tech-study-group.connpass.com/event/187008/" }}>
@@ -23,7 +21,7 @@ export const AppWidgetHead = () => {
                 <div className="col-sm-12 col-lg-4 p-1">
                     <div className="d-flex justify-content-center justify-content-lg-end">
                         <h4 className="titlelogo">
-                            チーム:  はじめてのFlask
+                            チーム: =はじめてのFlask=
                         </h4>
                     </div>
                 </div>
@@ -41,30 +39,6 @@ export const AppWidgetHead = () => {
 
 export const AppWidgetFoot = () => {
     return (
-
-        <div id="App-widget-foot">
-            <footer className="pt-4 my-md-5 pt-md-5 border-top ftcol">
-                <div className="btn-push2" style={{ color: "rgba(60,60,60,0)" }}>ゆゆうた　脱糞
-                     </div>
-
-
-                <div className="row ftcol">
-                    <div className="col-12">
-                        <ul className="list-unstyled text-small">
-                            <div className="d-flex justify-content-center">
-                                <li><a className="text-muted" href="https://talent.supporterz.jp/events/c30aa3bd-7c41-4d25-b4d2-a0ed32dd6b6f/">
-                                    サマーハッカソン〜オンラインでLVupする夏合宿vol.2〜
-                                    </a></li>
-                            </div>
-                        </ul>
-                        <div className="d-flex justify-content-center">
-                            <small className="d-block mb-3 text-muted">
-                                Copyright &copy; 2020 「はじめてのflask」. all rights reserved.
-                                </small>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
+        <div id="App-widget-foot">        </div>
     );
 }

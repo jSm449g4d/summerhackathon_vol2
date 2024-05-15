@@ -21,10 +21,10 @@ def indexpage_show():
         return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
 
 
-@app.route("/news_api.py", methods=["GET", "POST"])
+@app.route("/sh2_api.py", methods=["GET", "POST"])
 def api_show():
     try:
-        return importlib.import_module("news_api").show(flask.request)
+        return importlib.import_module("sh2_api").show(flask.request)
     except Exception as e:
         return flask.render_template("error.html", STATUS_ERROR_TEXT=str(e)), 500
 
