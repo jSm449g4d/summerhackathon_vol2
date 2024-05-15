@@ -1,5 +1,5 @@
 
-FROM python:3.8
+FROM python:3.11
 
 # Init
 ENV APP /var/www
