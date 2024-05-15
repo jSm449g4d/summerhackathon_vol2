@@ -16,7 +16,7 @@
 石原,田中: フロントエンド,インフラ  
 
 ## URL
-#### 管理者: 石原 (CloudRun)
+#### 管理者: 石原 (Devブランチ⇒CloudRun)
 https://sumhck-tlnesjcoqq-an.a.run.app
 
 ## 全体構成
