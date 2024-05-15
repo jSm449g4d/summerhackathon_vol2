@@ -1,14 +1,12 @@
 # pip3_package
-wheel
-setuptools
+wheel==0.40.0
+setuptools==67.8.0
 
 # server
-flask
-psutil
-waitress
-werkzeug
+flask==2.3.2
+waitress==2.1.2
 
 # application
-newsapi-python
-urllib3
-certifi
+newsapi-python==0.2.6
+urllib3==2.0.2
+certifi==2023.5.7
