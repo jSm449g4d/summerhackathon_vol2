@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client"
 import './stylecheets/style.sass';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 import { AppWidgetHead, AppWidgetFoot } from "./components/widget";
@@ -99,7 +99,7 @@ const AppMain = () => {
                     <YAxis dataKey="num" label={{ value: 'Number of articles', angle: -90, position: 'insideLeft' }} />
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <Bar dataKey="num" fill="#8884d8"
-                        onMouseEnter={(evt) => { setTargetDataDate(String(evt.date)) }} >
+                        onMouseEnter={(evt: any) => { setTargetDataDate(String(evt.date)) }} >
                         <LabelList dataKey="num" position="top" />
                     </Bar>
                 </BarChart>
@@ -176,8 +176,8 @@ const AppMain = () => {
                 <div className="input-group">
                     <input className="form-control form-control-lg" type="text" name="val1" value={kensaku}
                         placeholder="検索する文字を入力してください"
-                        onChange={(evt) => { setKensaku(evt.target.value) }}
-                        onKeyPress={(e) => { if (e.key == 'Enter' && kensaku != "") kensakusuruyo() }}
+                        onChange={(evt:any) => { setKensaku(evt.target.value) }}
+                        onKeyDown={(e:any) => { if (e.key == 'Enter' && kensaku != "") kensakusuruyo() }}
                     />
                     {showSearchButton()}
                 </div>
@@ -196,5 +196,6 @@ const AppMain = () => {
 };
 
 // WidgetHead
-document.body.insertAdjacentHTML('beforeend', '<div id="AppMain">AppWidgetHead loading...<\/div>');
-ReactDOM.render(<AppMain />, document.getElementById("AppMain"));
+const root = createRoot(document.getElementById("root"))
+root.render(<AppMain />);
+
