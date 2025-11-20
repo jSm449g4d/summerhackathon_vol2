@@ -35,7 +35,7 @@ GCP(Cloudbuild,CloudRun) + Debian + Waitress/Flask
 - Docker
 - Webpack4
 - Sass
-- bootstrap4
+- bootstrap5
 - fontawesome
 - newsAPI
 
