@@ -66,8 +66,8 @@ summerhackathon_vol2/
 ## ローカルでの使い方
 `git clone https://github.com/jSm449g4d/summerhackathon_vol2`  
 `cd summerhackathon_vol2/www`  
-`pip install -r requirements.txt`  
-`python wsgi.py`  
+`docker build -t myapp .`  
+`docker run --rm -p 8080:8080 myapp`  
 詳細は**Dockerfile**にて  
 
 ## 開発の進め方
