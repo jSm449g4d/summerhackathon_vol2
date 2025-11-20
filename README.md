@@ -17,7 +17,7 @@
 
 ## URL
 #### 管理者: 石原 (Devブランチ⇒CloudRun)
-https://sumhck-tlnesjcoqq-an.a.run.app
+https://sh2-973329585883.asia-northeast1.run.app/
 
 ## 全体構成
 ![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/overview.png)
@@ -35,7 +35,7 @@ GCP(Cloudbuild,CloudRun) + Debian + Waitress/Flask
 - Docker
 - Webpack4
 - Sass
-- bootstrap4
+- bootstrap5
 - fontawesome
 - newsAPI
 
@@ -66,8 +66,8 @@ summerhackathon_vol2/
 ## ローカルでの使い方
 `git clone https://github.com/jSm449g4d/summerhackathon_vol2`  
 `cd summerhackathon_vol2/www`  
-`pip install -r requirements.txt`  
-`python wsgi.py`  
+`docker build -t myapp .`  
+`docker run --rm -p 8080:8080 myapp`  
 詳細は**Dockerfile**にて  
 
 ## 開発の進め方
