@@ -17,7 +17,7 @@
 
 ## URL
 #### 管理者: 石原 (Devブランチ⇒CloudRun)
-https://sumhck-tlnesjcoqq-an.a.run.app
+https://sh2-973329585883.asia-northeast1.run.app/
 
 ## 全体構成
 ![](https://github.com/jSm449g4d/summerhackathon_vol2/blob/develop/assets/overview.png)
