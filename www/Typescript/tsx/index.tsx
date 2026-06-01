@@ -10,7 +10,7 @@ const AppMain = () => {
     console.log("れんだりんぐ")
     const [kensaku, setKensaku] = useState("")
     const [targetDataDate, setTargetDataDate] = useState("")
-    const [respData, setRespData] = useState([])
+    const [respData, setRespData] = useState<any[]>([])
     const [jpOnly, setJpOnly] = useState(true)
     const [message, setMessage] = useState("キーワードを入力してください")
 
@@ -196,6 +196,6 @@ const AppMain = () => {
 };
 
 // WidgetHead
-const root = createRoot(document.getElementById("root"))
+const root = createRoot(document.getElementById("root")!)
 root.render(<AppMain />);
 

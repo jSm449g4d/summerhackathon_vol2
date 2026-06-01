@@ -1,0 +1,6 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+html/static/node_modules
+Typescript/node_modules

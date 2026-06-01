@@ -145,5 +145,5 @@ def push_news_data(keyword,jponly):
     return data
 
 if __name__ == "__main__":
-    test = push_news_data("阿部")
+    test = push_news_data("阿部", True)
     print(test)

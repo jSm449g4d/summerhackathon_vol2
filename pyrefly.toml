@@ -1,0 +1,2 @@
+site-package-path = ["www/.venv/lib/python3.13/site-packages"]
+search-path = ["www"]
